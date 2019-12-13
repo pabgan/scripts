@@ -22,5 +22,9 @@ echo "\n===================== COMMITS ======================="
 echo "\n================= OTHER THINGS DONE ================="
 jrnl -from "\"$days_to_report days ago at 15:50\""
 
-echo "\n================== THINGS TO TELL ==================="
+echo "================== THINGS TO TELL ==================="
 todo.sh ls @scrum | head -n -2
+
+###################################################33
+# REFERENCES
+# [1] https://superuser.com/questions/271986/execute-a-command-from-another-directory-in-bash#271992
