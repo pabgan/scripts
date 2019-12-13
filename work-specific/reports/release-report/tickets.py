@@ -10,6 +10,7 @@ with open(f_comments, mode='r') as infile:
     reader = csv.reader(infile)
     comments = {rows[0]:rows[1] for rows in reader}
 
+# then we go over each ticket, add the comment and print it
 with open(f_tickets) as tickets:
     print("%s,Comments" % (next(tickets).strip()))
     for ticket in tickets:
