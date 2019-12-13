@@ -15,9 +15,9 @@ done
 
 echo "\n===================== COMMITS ======================="
 # Execute a command from another directory [1]
-( cd ~/Workspace/expresse/dsloExpresse/ ; cvs log -d \>"$days_to_report day ago" 2>/dev/null | grep "author: pganuza" -A1 | grep "DSLE-" | sort| uniq )
-( cd ~/Workspace/expresse/dsloExpresseAdditional/ ; cvs log -d \>"$days_to_report day ago" 2>/dev/null | grep "author: pganuza" -A1 | grep "QA-" | sort| uniq )
-( cd ~/Workspace/expresse/GuiWebServiceProject/ ; cvs log -d \>"$days_to_report day ago" 2>/dev/null | grep "author: pganuza" -A1 | grep "DSLE-" | sort| uniq )
+( cd ~/Workspace/expresse/dsloExpresse/ ; cvs log -d \>"$days_to_report days ago" 2>/dev/null | grep "author: pganuza" -A1 | grep -e "\(DSLE\|QA\)-" | sort| uniq )
+( cd ~/Workspace/expresse/dsloExpresseAdditional/ ; cvs log -d \>"$days_to_report days ago" 2>/dev/null | grep "author: pganuza" -A1 | grep -e "\(DSLE\|QA\)-" | sort| uniq )
+( cd ~/Workspace/expresse/GuiWebServiceProject/ ; cvs log -d \>"$days_to_report days ago" 2>/dev/null | grep "author: pganuza" -A1 | grep -e "\(DSLE\|QA\)-" | sort| uniq )
 
 echo "\n================= OTHER THINGS DONE ================="
 jrnl -from "\"$days_to_report days ago at 15:50\""
@@ -28,3 +28,4 @@ todo.sh ls @scrum | head -n -2
 ###################################################33
 # REFERENCES
 # [1] https://superuser.com/questions/271986/execute-a-command-from-another-directory-in-bash#271992
+#
