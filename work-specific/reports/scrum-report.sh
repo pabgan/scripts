@@ -22,7 +22,7 @@ echo "\n===================== COMMITS ======================="
 echo "\n================= OTHER THINGS DONE ================="
 jrnl -from "\"$days_to_report days ago at 15:50\""
 
-echo "================== THINGS TO TELL ==================="
+echo "\n================== THINGS TO TELL ==================="
 todo.sh ls @scrum | head -n -2
 
 ###################################################33
