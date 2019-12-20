@@ -4,9 +4,9 @@ header.md:
 info.md:
 	@echo "Info" > info.md
 	@echo "----" >> info.md
-	@echo "**Started on:** " >> info.md
-	@echo "**Target date:** " >> info.md
-	@echo "**Current binary:** " >> info.md
+	@echo "**Started on:**  " >> info.md
+	@echo "**Target date:**  " >> info.md
+	@echo "**Current binary:**  " >> info.md
 
 issues.md:
 	@echo "Issues" > issues.md
@@ -21,14 +21,16 @@ tickets.md: tickets.csv
 	cut -d',' -f2 --complement tickets-aux.csv > tickets-commented.csv
 	csv2md tickets-commented.csv >> tickets.md
 
-sltp.txt:
-	docx2txt < ../sltp/System\ Test\ Plan.docm > sltp.txt
+sltp-table.md:
+	docx2txt < sltp.docm > sltp-all.txt
+	grep -A117 -E 'Table of Contents\s+[0-9]' sltp-all.txt | grep -A1 -E '^[3-5]' > sltp-toc.txt
+	sed -i 's/\s\+[0-9]\+$$//' sltp-toc.txt
+	./sltp.py sltp-toc.txt > sltp-table.md
 
-sltp.md: sltp.txt
+sltp.md: sltp-table.md
 	@echo "System Level Test Plan" > sltp.md
 	@echo "----------------------" >> sltp.md
-	grep -A117 -E 'Table of Contents\s+[0-9]' sltp.txt | grep -A1 -E '^[3-5]' >> sltp.md
-	sed -i 's/\s\+[0-9]\+$$//' sltp.md
+	@cat sltp-table.md >> sltp.md
 
 goodbye.md:
 	@echo 'Best regards.' > goodbye.md
@@ -47,4 +49,4 @@ mail.mkd: header.md info.md issues.md tickets.md sltp.md goodbye.md
 	@cat goodbye.md >> mail.mkd
 
 clean:
-	rm -f mail.mkd sltp.md sltp.txt tickets.md tickets-commented.csv
+	rm -f mail.mkd sltp.md sltp-table.md sltp-toc.txt sltp-all.txt tickets.md tickets-commented.csv
