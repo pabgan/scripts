@@ -33,4 +33,19 @@ for line in fprov:
     
     # If it happens to be a INSERT statement into table PORT_INFO we updatify it and write it to output file
     if len(values) > 0 and values.get("TABLE") == "PORT_INFO":
-        print("UPDATE PORT_INFO SET SERVICE_PRODUCT='" + values.get("SERVICE_PRODUCT") + "' WHERE LINE_ID='" + values.get("LINE_ID") + "';\n")
+        update_sentence = "UPDATE PORT_INFO SET " 
+
+        first = True
+        for k,v in values.items():
+            if k in ('TABLE','ELEMENT_ID','LINE_ID'):
+                continue
+
+            if first:
+                update_sentence = update_sentence + k + '=\'' + v + '\''
+                first = False
+            else:
+                update_sentence = update_sentence + ', ' + k + '=\'' + v + '\''
+        
+        update_sentence = update_sentence + ' WHERE LINE_ID=\'' + values.get('LINE_ID') + '\';'
+
+        print(update_sentence)
