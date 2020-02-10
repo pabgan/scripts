@@ -1,5 +1,8 @@
 #!/bin/zsh
 # Show what I have done since last report
+
+export PATH=$PATH:$HOME/.local/bin/
+
 if [ "$#" -ne 1 ]; then
 	days_to_report=1
 else 
@@ -21,9 +24,9 @@ todo.sh ls @scrum | head -n -2
 
 echo "\n===================== COMMITS ======================="
 # Execute a command from another directory [1]
-( cd ~/Workspace/expresse/dsloExpresse/ ; cvs log -d \>"$days_to_report days ago" 2>/dev/null | grep "author: pganuza" -A1 | grep -e "\(DSLE\|QA\)-" | sort| uniq )
-( cd ~/Workspace/expresse/dsloExpresseAdditional/ ; cvs log -d \>"$days_to_report days ago" 2>/dev/null | grep "author: pganuza" -A1 | grep -e "\(DSLE\|QA\)-" | sort| uniq )
-( cd ~/Workspace/expresse/GuiWebServiceProject/ ; cvs log -d \>"$days_to_report days ago" 2>/dev/null | grep "author: pganuza" -A1 | grep -e "\(DSLE\|QA\)-" | sort| uniq )
+( cd ~/Workspace/expresse/dsloExpresse/ ; cvs log -d \>"$days_to_report days ago" 2>/dev/null | grep "author: pganuza" -A1 | tail -n1 )
+( cd ~/Workspace/expresse/dsloExpresseAdditional/ ; cvs log -d \>"$days_to_report days ago" 2>/dev/null | grep "author: pganuza" -A1 | tail -n1 )
+( cd ~/Workspace/expresse/GuiWebServiceProject/ ; cvs log -d \>"$days_to_report days ago" 2>/dev/null | grep "author: pganuza" -A1 | tail -n1 )
 
 
 ###################################################33
