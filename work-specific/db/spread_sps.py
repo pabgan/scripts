@@ -46,7 +46,7 @@ for line in provisioned_lines:
 	sp = line["SERVICE_PRODUCT"] 
 	original_prov[sp] = original_prov.get(sp, 0) + 1
 
-print("Original provisioning: %s" % (original_prov))
+#print("Original provisioning: %s" % (original_prov))
 
 ###########################################################
 # 5. Now we evenly spread SPs amongst those lines trying to 
@@ -61,7 +61,7 @@ tmp_prov = original_prov.copy()
 for line in provisioned_lines:
 	sp = line["SERVICE_PRODUCT"] 
 	if sp not in wanted_service_products or tmp_prov[sp] > max_lines_per_sp:
-		print("Adding line to pool: %s" % (line))
+#		print("Adding line to pool: %s" % (line))
 		pool.append(line)
 		tmp_prov[sp] = tmp_prov[sp] - 1
 	
@@ -73,10 +73,10 @@ for line in provisioned_lines:
 #     lines from the pool as needed
 for sp in wanted_service_products:
 	#print("---------------------------------------------")
-	print("Checking %s" % (sp))
+#	print("Checking %s" % (sp))
 	while len(pool) > 0 and tmp_prov[sp] < max_lines_per_sp:
 		#print(".............................................")
-		print("Needs one more line because: pool = %s & tmp_prov[sp] = %s" % (len(pool), tmp_prov[sp]))
+#		print("Needs one more line because: pool = %s & tmp_prov[sp] = %s" % (len(pool), tmp_prov[sp]))
 		line = pool.pop()
 		#print("Assigning line: %s" % (line))
 		original_sp = line["SERVICE_PRODUCT"]
