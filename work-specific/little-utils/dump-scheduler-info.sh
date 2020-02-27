@@ -1,12 +1,11 @@
 #!/bin/bash
-
 if [ $# != 1 ]; then
 	echo 1>&2 "*** Usage: $0 [host]"
 	exit 2
 fi
 
 host=$1
-ssh $host '
+ssh user@$host '
 password=$(grep -E "^monitorRole" /home/user/install/server/config/assia.jmxremote.password | cut -d" " -f 2)
 echo "Using \"$password\" as password."
 cd /home/user/install/server
