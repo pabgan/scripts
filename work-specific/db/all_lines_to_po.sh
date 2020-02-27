@@ -1,3 +1,15 @@
+#!/bin/zsh
+if [[ "$1" == "-h" ]]; then
+	echo "Usage: `basename $0` [db_schema]"
+	echo "       If no schema name is provided, the value of \$CUSTOMER_DB will be used."
+	exit 0
+fi
+if [ -z $1];
+then
+	DB=$CUSTOMER_DB
+else
+	DB=$1
+fi
 echo 'Set serverout on;' 
 echo 'VARIABLE resultSet REFCURSOR;'
 echo 'VARIABLE statusCode NUMBER;'
