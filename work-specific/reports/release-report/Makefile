@@ -13,12 +13,15 @@ issues.md:
 	@echo "------" >> issues.md
 	@echo "None." >> issues.md
 
-tickets.md: tickets.csv
+tickets-comments.csv:
+	touch tickets-comments.csv
+
+tickets.md: tickets.csv tickets-comments.csv
 	@#column -t -s',' tickets.csv > tickets.md
 	@echo "Tickets" > tickets.md
 	@echo "-------" >> tickets.md
-	./tickets.py tickets.csv tickets-comments.csv > tickets-aux.csv
-	cut -d',' -f2 --complement tickets-aux.csv > tickets-commented.csv
+	cut -d',' -f2 --complement tickets.csv > tickets-aux.csv
+	./tickets.py tickets-aux.csv tickets-comments.csv > tickets-commented.csv
 	csv2md tickets-commented.csv >> tickets.md
 
 sltp-table.md:
