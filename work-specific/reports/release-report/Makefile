@@ -1,3 +1,5 @@
+.PHONY: clean copy-mail
+
 header.md:
 	@echo 'Hi all.\n\nThis is the current status of ${CUS} ${VER} release validation:' > header.md
 
@@ -14,7 +16,7 @@ issues.md:
 	@echo "None." >> issues.md
 
 tickets-comments.csv:
-	touch tickets-comments.csv
+	cut tickets.csv -d',' -f1 | tail -n+2 > tickets-comments.csv
 
 tickets.md: tickets.csv tickets-comments.csv
 	@#column -t -s',' tickets.csv > tickets.md
@@ -26,7 +28,7 @@ tickets.md: tickets.csv tickets-comments.csv
 
 sltp-table.md:
 	docx2txt < sltp.docm > sltp-all.txt
-	grep -A117 -E 'Table of Contents\s+[0-9]' sltp-all.txt | grep -A1 -E '^[3-5]' > sltp-toc.txt
+	grep -A117 -E 'Table of Contents\s*[0-9]*' sltp-all.txt | grep -A1 -E '^[3-5]' > sltp-toc.txt
 	sed -i 's/\s\+[0-9]\+$$//' sltp-toc.txt
 	./sltp.py sltp-toc.txt > sltp-table.md
 
@@ -38,7 +40,7 @@ sltp.md: sltp-table.md
 goodbye.md:
 	@echo 'Best regards.' > goodbye.md
 
-mail.mkd: header.md info.md issues.md tickets.md sltp.md goodbye.md
+mail.mkd: clean header.md info.md issues.md tickets.md sltp.md goodbye.md
 	@cat header.md >> mail.mkd
 	@echo "\n" >> mail.mkd
 	@cat info.md >> mail.mkd
@@ -53,3 +55,6 @@ mail.mkd: header.md info.md issues.md tickets.md sltp.md goodbye.md
 
 clean:
 	rm -f mail.mkd sltp.md sltp-table.md sltp-toc.txt sltp-all.txt tickets.md tickets-commented.csv
+
+copy-mail: mail.mkd
+	pandoc -t html mail.mkd | xclip
