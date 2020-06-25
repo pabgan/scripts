@@ -3,6 +3,10 @@ import sys, re
 
 f_sltp_toc = sys.argv[1]
 
+def print_sltp_table_header():
+    print('| ID | Title | Status |')
+    print('| -- | ----- | ------ |')
+
 #print('###############################\n')
 with open(f_sltp_toc, mode='r') as infile:
     for line in infile:
@@ -16,8 +20,7 @@ with open(f_sltp_toc, mode='r') as infile:
         if re.search('^[0-9]\s', line):
             x = re.findall('^([0-9])\s+(.*)', line)
             print("### %s" % (x[0][1]))
-            print('| ID | Title | Status |')
-            print('| -- | ----- | ------ |')
+            print_sltp_table_header()
         if re.search('^[0-9]\.', line):
             title = re.findall('^([0-9])\.([0-9]+)\s+(.*)', line)
             status = re.findall('^Status:\s*(.*)', infile.readline())

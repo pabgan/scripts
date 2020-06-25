@@ -32,9 +32,15 @@ sltp-table.md:
 	sed -i 's/\s\+[0-9]\+$$//' sltp-toc.txt
 	./sltp.py sltp-toc.txt > sltp-table.md
 
-sltp.md: sltp-table.md
+sltp-comments.md:
+	@echo "##### Comments" > sltp-comments.md
+	@echo "None" >> sltp-comments.md
+
+sltp.md: sltp-table.md sltp-comments.md
 	@echo "System Level Test Plan" > sltp.md
 	@echo "----------------------" >> sltp.md
+	@cat sltp-comments.md >> sltp.md
+	@echo "\n\n" >> sltp.md
 	@cat sltp-table.md >> sltp.md
 
 goodbye.md:
