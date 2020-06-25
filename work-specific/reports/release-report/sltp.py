@@ -3,7 +3,7 @@ import sys, re
 
 f_sltp_toc = sys.argv[1]
 
-def print_sltp_table_header():
+def print_table_header():
     print('| ID | Title | Status |')
     print('| -- | ----- | ------ |')
 
@@ -17,10 +17,12 @@ with open(f_sltp_toc, mode='r') as infile:
 #            print('Empty line!!')
             continue
 
+        # Generic / Customer specific division
         if re.search('^[0-9]\s', line):
             x = re.findall('^([0-9])\s+(.*)', line)
             print("### %s" % (x[0][1]))
-            print_sltp_table_header()
+            print_table_header()
+        # Actual list of tests
         if re.search('^[0-9]\.', line):
             title = re.findall('^([0-9])\.([0-9]+)\s+(.*)', line)
             status = re.findall('^Status:\s*(.*)', infile.readline())
