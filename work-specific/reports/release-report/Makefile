@@ -58,7 +58,7 @@ mail.md: clean header.md info.md issues.md tickets.md sltp.md goodbye.md
 clean:
 	rm -f mail.md jira-comment.md sltp.md sltp-table.md sltp-toc.txt sltp-all.txt tickets.md tickets-commented.csv
 
-copy-mail: mail.md
+copy-html: mail.md
 	pandoc -t html mail.md | xclip
 
 jira-comment.md: mail.md
@@ -69,5 +69,5 @@ jira-comment.md: mail.md
 	@sed -i 's/**/*/g' jira-comment.md
 	@sed -i '/| ---/d' jira-comment.md
 
-copy-jira-comment: jira-comment.md
+copy-jira: jira-comment.md
 	xclip < jira-comment.md
