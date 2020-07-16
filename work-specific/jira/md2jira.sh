@@ -14,7 +14,7 @@ output=$( echo "${output}" | sed '/^| --/d' )
 output=$( echo "${output}" | sed -E 's/^```(.+)/{code:\1}/g' )
 output=$( echo "${output}" | sed 's/^```$/{code}/g' )
 # Convert code inline
-output=$( echo "${output}" | sed -E 's/`(.*)`/{{\1}}/g' )
+output=$( echo "${output}" | sed -E 's/`([^`]+)`/{{\1}}/g' )
 # Convert numbered lists
 output=$( echo "${output}" | sed 's/^1. /# /g' )
 # Convert quotes
