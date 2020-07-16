@@ -24,9 +24,9 @@ todo.sh ls @scrum | head -n -2
 
 echo "\n===================== COMMITS ======================="
 # Execute a command from another directory [1]
-( cd ~/Workspace/expresse/dsloExpresse/ ; cvs log -d \>"$days_to_report days ago" 2>/dev/null | grep "author: pganuza" -A1 | tail -n1 )
-( cd ~/Workspace/expresse/dsloExpresseAdditional/ ; cvs log -d \>"$days_to_report days ago" 2>/dev/null | grep "author: pganuza" -A1 | tail -n1 )
-( cd ~/Workspace/expresse/GuiWebServiceProject/ ; cvs log -d \>"$days_to_report days ago" 2>/dev/null | grep "author: pganuza" -A1 | tail -n1 )
+( cd ~/Repositorios/ASSIA/expresse/dsloExpresse/ ; cvs log -d \>"$days_to_report days ago" 2>/dev/null | grep "author: pganuza" -A1 | tail -n1 )
+( cd ~/Repositorios/ASSIA/expresse/dsloExpresseAdditional/ ; cvs log -d \>"$days_to_report days ago" 2>/dev/null | grep "author: pganuza" -A1 | tail -n1 )
+( cd ~/Repositorios/ASSIA/expresse/GuiWebServiceProject/ ; cvs log -d \>"$days_to_report days ago" 2>/dev/null | grep "author: pganuza" -A1 | tail -n1 )
 
 
 ###################################################33
