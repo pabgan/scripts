@@ -21,7 +21,9 @@ output=$( echo "${output}" | sed 's/^1. /# /g' )
 output=$( echo "${output}" | sed -E 's/^> (.*)/{quote}\1{quote} /g' )
 # Convert usernames
 jira_users_list="$HOME/Documentos/KnowHow/jira-users.csv"
+## Grep out all the words starting with '@' and containing only letters
 for name in $( echo "${output}" | grep -oE '@[[:alpha:]]+' ); do
+	## For each one of those names, look for its Jira ID
 	jira_user_name=$( grep "$name" $jira_users_list | cut -d';' -f2 )
 	output=$( echo "${output}" | sed -E "s/$name/$jira_user_name/g" )
 done
