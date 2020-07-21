@@ -2,22 +2,62 @@
 import argparse
 from jira import JIRA
 
+########################################################
+### CONFIGURATION
+########################################################
 jira = JIRA('https://assia-inc.atlassian.net/')
 
+########################################################
+### ACTIONS
+########################################################
+def query():
+    if args.issue:
+        issue = jira.issue(args.issue)
 
+        print(getattr(issue.fields, args.field))
+    else:
+        print('Only --issue querying implemented yet')
+
+def edit():
+    if args.issue is None:
+        print('ERROR: --issue needed')
+        return
+
+    if args.field is None:
+        print('ERROR: --field needed')
+        return
+
+    if args.value is None:
+        print('ERROR: --value needed')
+        return
+
+    issue = jira.issue(args.issue)
+    fields={args.field: args.value}
+    #print(fields)
+    issue.update(fields)
+
+def assign():
+    if args.issue is None:
+        print('ERROR: --issue needed')
+        return
+
+    jira.assign_issue(args.issue, args.value)
+
+########################################################
+### MAIN
+########################################################
 if __name__ == "__main__":
-    desc= "Interact with Jira instance"
-    desc+="Following ASSIA-QA-land structure, it only takes one parameter by command line (the path to the config.properties file) where all the others setting should be there.\n"
+    desc= "Interact with Jira"
     parser = argparse.ArgumentParser(description=desc)
     parser.add_argument("action", help="hello")
     parser.add_argument("--issue", required=False)
-    parser.add_argument("--summary", action='store_true', required=False)
+    parser.add_argument("--field", required=False)
+    parser.add_argument("--value", required=False)
     args = parser.parse_args()
 
-    if args.action == 'query':
-        if args.summary:
-            issue=jira.issue(args.issue)
-            print(issue.fields.summary)
-        else:
-            print('Querying')
+    actions = {'query' : query,
+               'edit' :  edit,
+               'assign' :  assign,
+    }
 
+    actions[args.action]()
