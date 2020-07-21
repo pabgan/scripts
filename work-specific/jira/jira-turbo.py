@@ -5,7 +5,6 @@ from jira import JIRA
 ########################################################
 ### CONFIGURATION
 ########################################################
-jira = JIRA('https://assia-inc.atlassian.net/')
 
 ########################################################
 ### ACTIONS
@@ -33,7 +32,6 @@ def edit():
 
     issue = jira.issue(args.issue)
     fields={args.field: args.value}
-    #print(fields)
     issue.update(fields)
 
 def assign():
@@ -46,18 +44,20 @@ def assign():
 ########################################################
 ### MAIN
 ########################################################
+actions = {'query' : query,
+           'edit' :  edit,
+           'assign' :  assign,
+}
+
 if __name__ == "__main__":
     desc= "Interact with Jira"
     parser = argparse.ArgumentParser(description=desc)
-    parser.add_argument("action", help="hello")
+    parser.add_argument("action", help="One of {}".format(', '.join(actions.keys())))
     parser.add_argument("--issue", required=False)
     parser.add_argument("--field", required=False)
     parser.add_argument("--value", required=False)
     args = parser.parse_args()
 
-    actions = {'query' : query,
-               'edit' :  edit,
-               'assign' :  assign,
-    }
 
+    jira = JIRA('https://assia-inc.atlassian.net/')
     actions[args.action]()
