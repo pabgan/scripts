@@ -26,6 +26,16 @@ output=$( echo "${output}" | sed 's/^1. /# /g' )
 # Convert quotes
 output=$( echo "${output}" | sed -E 's/^> (.*)/{quote}\1{quote} /g' )
 
+# Convert images
+alt_text='\[([^]]+)\]'
+img_path='\(([^)]+)\)'
+output=$( echo "${output}" | sed -E "s/!${alt_text}${img_path}/!\2|thumbnail!/g" )
+
+# Convert attachments
+alt_text='\[([^]]+)\]'
+img_path='\(([^)]+)\)'
+output=$( echo "${output}" | sed -E "s/${alt_text}${img_path}/[^\2]/g" )
+
 # Convert usernames
 jira_users_list="$HOME/Documentos/KnowHow/jira-users.csv"
 ## Grep out all the words starting with '@' and containing only letters
