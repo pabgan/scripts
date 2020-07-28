@@ -13,14 +13,14 @@ echo "Scrum report since day: $(date --date="$1 days ago")"
 echo "\n================== COMPLETED TASKS =================="
 ommited_tags='@scrum|@qa-meeting'
 for d ({$days_to_report..0}) do
-	grep -E "^x $(date --iso-8601 --date="$d days ago")" ~/.todo-txt/trabajo-done.txt ~/.todo-txt/trabajo-todo.txt | grep -Ev $ommited_tags | sed 's/.*:x //g'
+	grep -E "^x $(date --iso-8601 --date="$d days ago")" ~/Documentos/organizacion/todo/done.txt ~/Documentos/organizacion/todo/todo.txt | grep -Ev $ommited_tags | sed 's/.*:x //g'
 done
 
 echo "\n================= OTHER THINGS DONE ================="
 jrnl -from "\"$days_to_report days ago at 15:50\""
 
 echo "\n================== THINGS TO TELL ==================="
-todo.sh ls @scrum | head -n -2
+todo-txt ls @scrum | head -n -2
 
 echo "\n===================== COMMITS ======================="
 # Execute a command from another directory [1]
