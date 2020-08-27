@@ -4,6 +4,7 @@
 output=$( sed 's/^-----*$/----/' "${1}" )
 
 # Convert titles
+output=$( echo "${output}" | sed 's/^###### /h6. /g' )
 output=$( echo "${output}" | sed 's/^##### /h5. /g' )
 output=$( echo "${output}" | sed 's/^#### /h4. /g' )
 output=$( echo "${output}" | sed 's/^### /h3. /g' )
@@ -21,7 +22,8 @@ output=$( echo "${output}" | sed 's/^```$/{code}/g' )
 output=$( echo "${output}" | sed -E 's/`([^`]+)`/{{\1}}/g' )
 
 # Convert numbered lists
-output=$( echo "${output}" | sed 's/^1. /# /g' )
+output=$( echo "${output}" | sed -E 's/^1. /# /g' )
+output=$( echo "${output}" | sed -E 's/^\t1. /## /g' )
 
 # Convert quotes
 output=$( echo "${output}" | sed -E 's/^> (.*)/{quote}\1{quote} /g' )
