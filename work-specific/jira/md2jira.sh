@@ -35,11 +35,11 @@ output=$( echo "${output}" | sed -E "s/!${alt_text}${img_path}/!\2|thumbnail!/g"
 
 # Convert attachments
 alt_text='\[([^]]+)\]'
-img_path='\(([^)]+)\)'
-output=$( echo "${output}" | sed -E "s/${alt_text}${img_path}/[^\2]/g" )
+att_path='\(([^)]+)\)'
+output=$( echo "${output}" | sed -E "s/${alt_text}${att_path}/[^\2]/g" )
 
 # Convert usernames
-jira_users_list="$HOME/Documentos/KnowHow/jira-users.csv"
+jira_users_list="$HOME/Documents/KnowHow/jira-users.csv"
 ## Grep out all the words starting with '@' and containing only letters
 for name in $( echo "${output}" | grep -oE '@[[:alpha:]]+' ); do
 	## For each one of those names, look for its Jira ID
