@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/">
+  <soapenv:Header/>
+  <soapenv:Body>
+    <ns:getAvailableFieldsResponse xmlns:ns="http://ws.api.report.dslo.assia.com">
+      <ns:return xmlns:ax253="http://model.napi.dslo.assia.com/xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="ax253:ResponseDataBean">
+        <ax253:entries xsi:type="ax253:ResponseDataEntry">
+          <ax253:values xsi:type="ax253:ValueMappingBean">
+            <ax253:key>FIELD_NAME</ax253:key>
+            <ax253:value>lineinfo.id</ax253:value>
+          </ax253:values>
+        </ax253:entries>
+        <ax253:entries xsi:type="ax253:ResponseDataEntry">
+          <ax253:values xsi:type="ax253:ValueMappingBean">
+            <ax253:key>FIELD_NAME</ax253:key>
+            <ax253:value>lineinfo.dslam</ax253:value>
+          </ax253:values>
+        </ax253:entries>
+        <ax253:entries xsi:type="ax253:ResponseDataEntry">
+          <ax253:values xsi:type="ax253:ValueMappingBean">
+            <ax253:key>FIELD_NAME</ax253:key>
+            <ax253:value>lineinfo.port</ax253:value>
+          </ax253:values>
+        </ax253:entries>
+        <ax253:entries xsi:type="ax253:ResponseDataEntry">
+          <ax253:values xsi:type="ax253:ValueMappingBean">
+            <ax253:key>FIELD_NAME</ax253:key>
+            <ax253:value>dateinfo.data_collection_date</ax253:value>
+          </ax253:values>
+        </ax253:entries>
+        <ax253:entries xsi:type="ax253:ResponseDataEntry">
+          <ax253:values xsi:type="ax253:ValueMappingBean">
+            <ax253:key>FIELD_NAME</ax253:key>
+            <ax253:value>layer2.vlan</ax253:value>
+          </ax253:values>
+        </ax253:entries>
+        <ax253:entries xsi:type="ax253:ResponseDataEntry">
+          <ax253:values xsi:type="ax253:ValueMappingBean">
+            <ax253:key>FIELD_NAME</ax253:key>
+            <ax253:value>layer2.svlan</ax253:value>
+          </ax253:values>
+        </ax253:entries>
+        <ax253:entries xsi:type="ax253:ResponseDataEntry">
+          <ax253:values xsi:type="ax253:ValueMappingBean">
+            <ax253:key>FIELD_NAME</ax253:key>
+            <ax253:value>layer2.state</ax253:value>
+          </ax253:values>
+        </ax253:entries>
+        <ax253:entries xsi:type="ax253:ResponseDataEntry">
+          <ax253:values xsi:type="ax253:ValueMappingBean">
+            <ax253:key>FIELD_NAME</ax253:key>
+            <ax253:value>layer2.speed</ax253:value>
+          </ax253:values>
+        </ax253:entries>
+        <ax253:entries xsi:type="ax253:ResponseDataEntry">
+          <ax253:values xsi:type="ax253:ValueMappingBean">
+            <ax253:key>FIELD_NAME</ax253:key>
+            <ax253:value>layer2.speed_configured</ax253:value>
+          </ax253:values>
+        </ax253:entries>
+        <ax253:entries xsi:type="ax253:ResponseDataEntry">
+          <ax253:values xsi:type="ax253:ValueMappingBean">
+            <ax253:key>FIELD_NAME</ax253:key>
+            <ax253:value>layer2.duplex_mode</ax253:value>
+          </ax253:values>
+        </ax253:entries>
+        <ax253:entries xsi:type="ax253:ResponseDataEntry">
+          <ax253:values xsi:type="ax253:ValueMappingBean">
+            <ax253:key>FIELD_NAME</ax253:key>
+            <ax253:value>layer2.duplex_mode.code</ax253:value>
+          </ax253:values>
+        </ax253:entries>
+        <ax253:entries xsi:type="ax253:ResponseDataEntry">
+          <ax253:values xsi:type="ax253:ValueMappingBean">
+            <ax253:key>FIELD_NAME</ax253:key>
+            <ax253:value>layer2.duplex_mode_configured</ax253:value>
+          </ax253:values>
+        </ax253:entries>
+        <ax253:entries xsi:type="ax253:ResponseDataEntry">
+          <ax253:values xsi:type="ax253:ValueMappingBean">
+            <ax253:key>FIELD_NAME</ax253:key>
+            <ax253:value>layer2.duplex_mode_configured.code</ax253:value>
+          </ax253:values>
+        </ax253:entries>
+        <ax253:fieldNames>FIELD_NAME</ax253:fieldNames>
+        <ax253:message xsi:nil="true"/>
+        <ax253:statusCode>0</ax253:statusCode>
+      </ns:return>
+    </ns:getAvailableFieldsResponse>
+  </soapenv:Body>
+</soapenv:Envelope>

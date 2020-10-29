@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/">
+  <soapenv:Header/>
+  <soapenv:Body>
+    <ns:getDataResponse xmlns:ns="http://ws.api.report.dslo.assia.com">
+      <ns:return xmlns:ax253="http://model.napi.dslo.assia.com/xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="ax253:ResponseDataBean">
+        <ax253:entries xsi:type="ax253:ResponseDataEntry">
+          <ax253:values xsi:type="ax253:ValueMappingBean">
+            <ax253:key>layer2.additional.clei_code</ax253:key>
+            <ax253:value>BVL3AX7DTA</ax253:value>
+          </ax253:values>
+          <ax253:values xsi:type="ax253:ValueMappingBean">
+            <ax253:key>layer2.additional.omcc_version</ax253:key>
+            <ax253:value>G_988_2011_Amd_1_Base</ax253:value>
+          </ax253:values>
+          <ax253:values xsi:type="ax253:ValueMappingBean">
+            <ax253:key>layer2.duplex_mode.code</ax253:key>
+            <ax253:value>-1</ax253:value>
+          </ax253:values>
+          <ax253:values xsi:type="ax253:ValueMappingBean">
+            <ax253:key>layer2.duplex_mode</ax253:key>
+            <ax253:value>INVALID</ax253:value>
+          </ax253:values>
+          <ax253:values xsi:type="ax253:ValueMappingBean">
+            <ax253:key>layer2.duplex_mode_configured</ax253:key>
+            <ax253:value>AUTO</ax253:value>
+          </ax253:values>
+          <ax253:values xsi:type="ax253:ValueMappingBean">
+            <ax253:key>layer2.additional.alternate_software_version</ax253:key>
+            <ax253:value>J74.00.0001.G2</ax253:value>
+          </ax253:values>
+          <ax253:values xsi:type="ax253:ValueMappingBean">
+            <ax253:key>layer2.additional.hardware_version</ax253:key>
+            <ax253:value>D</ax253:value>
+          </ax253:values>
+          <ax253:values xsi:type="ax253:ValueMappingBean">
+            <ax253:key>layer2.duplex_mode_configured.code</ax253:key>
+            <ax253:value>0</ax253:value>
+          </ax253:values>
+          <ax253:values xsi:type="ax253:ValueMappingBean">
+            <ax253:key>layer2.additional.mode</ax253:key>
+            <ax253:value>dual</ax253:value>
+          </ax253:values>
+          <ax253:values xsi:type="ax253:ValueMappingBean">
+            <ax253:key>layer2.additional.part_number</ax253:key>
+            <ax253:value>1287702G1C</ax253:value>
+          </ax253:values>
+          <ax253:values xsi:type="ax253:ValueMappingBean">
+            <ax253:key>layer2.additional.battery_backup</ax253:key>
+            <ax253:value>false</ax253:value>
+          </ax253:values>
+          <ax253:values xsi:type="ax253:ValueMappingBean">
+            <ax253:key>layer2.additional.traffic_management</ax253:key>
+            <ax253:value>priorityControlled</ax253:value>
+          </ax253:values>
+          <ax253:values xsi:type="ax253:ValueMappingBean">
+            <ax253:key>layer2.additional.description</ax253:key>
+            <ax253:value>1380 Troy S</ax253:value>
+          </ax253:values>
+          <ax253:values xsi:type="ax253:ValueMappingBean">
+            <ax253:key>layer2.speed_configured</ax253:key>
+            <ax253:value>0</ax253:value>
+          </ax253:values>
+          <ax253:values xsi:type="ax253:ValueMappingBean">
+            <ax253:key>lineinfo.port</ax253:key>
+            <ax253:value>1-1-1-4#1-g1</ax253:value>
+          </ax253:values>
+          <ax253:values xsi:type="ax253:ValueMappingBean">
+            <ax253:key>layer2.additional.registration_id</ax253:key>
+            <ax253:value>0003010424</ax253:value>
+          </ax253:values>
+        </ax253:entries>
+        <ax253:fieldNames>layer2.additional.clei_code</ax253:fieldNames>
+        <ax253:fieldNames>layer2.additional.omcc_version</ax253:fieldNames>
+        <ax253:fieldNames>layer2.duplex_mode.code</ax253:fieldNames>
+        <ax253:fieldNames>layer2.duplex_mode</ax253:fieldNames>
+        <ax253:fieldNames>layer2.duplex_mode_configured</ax253:fieldNames>
+        <ax253:fieldNames>layer2.additional.alternate_software_version</ax253:fieldNames>
+        <ax253:fieldNames>layer2.additional.hardware_version</ax253:fieldNames>
+        <ax253:fieldNames>layer2.duplex_mode_configured.code</ax253:fieldNames>
+        <ax253:fieldNames>layer2.additional.mode</ax253:fieldNames>
+        <ax253:fieldNames>layer2.additional.part_number</ax253:fieldNames>
+        <ax253:fieldNames>layer2.additional.battery_backup</ax253:fieldNames>
+        <ax253:fieldNames>layer2.additional.traffic_management</ax253:fieldNames>
+        <ax253:fieldNames>layer2.additional.description</ax253:fieldNames>
+        <ax253:fieldNames>layer2.speed_configured</ax253:fieldNames>
+        <ax253:fieldNames>lineinfo.port</ax253:fieldNames>
+        <ax253:fieldNames>layer2.additional.registration_id</ax253:fieldNames>
+        <ax253:message xsi:nil="true"/>
+        <ax253:statusCode>0</ax253:statusCode>
+      </ns:return>
+    </ns:getDataResponse>
+  </soapenv:Body>
+</soapenv:Envelope>

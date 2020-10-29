@@ -1,0 +1,394 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/">
+  <soapenv:Header/>
+  <soapenv:Body>
+    <ns:submitRequestResponse xmlns:ns="http://impl.realtime.dslo.assia.com">
+      <ns:return xmlns:ax213="http://statuscodes.napi.dslo.assia.com/xsd" xmlns:ax28="http://api.realtime.dslo.assia.com/xsd" xmlns:ax29="http://model.napi.dslo.assia.com/xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="ax29:ResponseDataBean">
+        <ax29:entries xsi:type="ax29:ResponseDataEntry">
+          <ax29:values xsi:type="ax29:ValueMappingBean">
+            <ax29:key>line.operation.pon.olt.voltage</ax29:key>
+            <ax29:value>3.33</ax29:value>
+          </ax29:values>
+          <ax29:values xsi:type="ax29:ValueMappingBean">
+            <ax29:key>line.operation.pon.ont.temperature</ax29:key>
+            <ax29:value>38.801</ax29:value>
+          </ax29:values>
+          <ax29:values xsi:type="ax29:ValueMappingBean">
+            <ax29:key>line.performance.pon.ds.bytes</ax29:key>
+            <ax29:value xsi:nil="true"/>
+          </ax29:values>
+          <ax29:values xsi:type="ax29:ValueMappingBean">
+            <ax29:key>line.operation.pon.last_disconnect.reason</ax29:key>
+            <ax29:value xsi:nil="true"/>
+          </ax29:values>
+          <ax29:values xsi:type="ax29:ValueMappingBean">
+            <ax29:key>line.performance.pon.ds.uas</ax29:key>
+            <ax29:value xsi:nil="true"/>
+          </ax29:values>
+          <ax29:values xsi:type="ax29:ValueMappingBean">
+            <ax29:key>line.performance.pon.ds.bip8.error</ax29:key>
+            <ax29:value>0</ax29:value>
+          </ax29:values>
+          <ax29:values xsi:type="ax29:ValueMappingBean">
+            <ax29:key>line.performance.pon.ds.ses</ax29:key>
+            <ax29:value xsi:nil="true"/>
+          </ax29:values>
+          <ax29:values xsi:type="ax29:ValueMappingBean">
+            <ax29:key>layer2.duplex_mode_configured.code</ax29:key>
+            <ax29:value>0</ax29:value>
+          </ax29:values>
+          <ax29:values xsi:type="ax29:ValueMappingBean">
+            <ax29:key>layer2.speed</ax29:key>
+            <ax29:value>-1</ax29:value>
+          </ax29:values>
+          <ax29:values xsi:type="ax29:ValueMappingBean">
+            <ax29:key>line.operation.pon.us.tx.power</ax29:key>
+            <ax29:value>3.918</ax29:value>
+          </ax29:values>
+          <ax29:values xsi:type="ax29:ValueMappingBean">
+            <ax29:key>line.operation.pon.us.rx.power</ax29:key>
+            <ax29:value>-8</ax29:value>
+          </ax29:values>
+          <ax29:values xsi:type="ax29:ValueMappingBean">
+            <ax29:key>completion.date</ax29:key>
+            <ax29:value>2020-09-24 03:15:21</ax29:value>
+          </ax29:values>
+          <ax29:values xsi:type="ax29:ValueMappingBean">
+            <ax29:key>line.info.pon.olt.firmware.version</ax29:key>
+            <ax29:value xsi:nil="true"/>
+          </ax29:values>
+          <ax29:values xsi:type="ax29:ValueMappingBean">
+            <ax29:key>line.performance.date</ax29:key>
+            <ax29:value>2020-09-24 03:15:21</ax29:value>
+          </ax29:values>
+          <ax29:values xsi:type="ax29:ValueMappingBean">
+            <ax29:key>realtime.dcpc.ont.state</ax29:key>
+            <ax29:value>IS</ax29:value>
+          </ax29:values>
+          <ax29:values xsi:type="ax29:ValueMappingBean">
+            <ax29:key>line.info.pon.ont.model</ax29:key>
+            <ax29:value>NOCLEICODEG240WC</ax29:value>
+          </ax29:values>
+          <ax29:values xsi:type="ax29:ValueMappingBean">
+            <ax29:key>line.operation.pon.olt.current</ax29:key>
+            <ax29:value>23</ax29:value>
+          </ax29:values>
+          <ax29:values xsi:type="ax29:ValueMappingBean">
+            <ax29:key>layer2.vlan</ax29:key>
+            <ax29:value>3479</ax29:value>
+          </ax29:values>
+          <ax29:values xsi:type="ax29:ValueMappingBean">
+            <ax29:key>realtime.dcpc.statuscode.olt</ax29:key>
+            <ax29:value>0</ax29:value>
+          </ax29:values>
+          <ax29:values xsi:type="ax29:ValueMappingBean">
+            <ax29:key>line.info.pon.olt.model</ax29:key>
+            <ax29:value>LTB3477-CH      </ax29:value>
+          </ax29:values>
+          <ax29:values xsi:type="ax29:ValueMappingBean">
+            <ax29:key>lineinfo.id</ax29:key>
+            <ax29:value>9875550011</ax29:value>
+          </ax29:values>
+          <ax29:values xsi:type="ax29:ValueMappingBean">
+            <ax29:key>line.performance.pon.us.bytes</ax29:key>
+            <ax29:value xsi:nil="true"/>
+          </ax29:values>
+          <ax29:values xsi:type="ax29:ValueMappingBean">
+            <ax29:key>layer2.svlan</ax29:key>
+            <ax29:value>292</ax29:value>
+          </ax29:values>
+          <ax29:values xsi:type="ax29:ValueMappingBean">
+            <ax29:key>line.operation.pon.ds.fec.enabled</ax29:key>
+            <ax29:value>1</ax29:value>
+          </ax29:values>
+          <ax29:values xsi:type="ax29:ValueMappingBean">
+            <ax29:key>line.operation.pon.olt.temperature</ax29:key>
+            <ax29:value>39.69</ax29:value>
+          </ax29:values>
+          <ax29:values xsi:type="ax29:ValueMappingBean">
+            <ax29:key>layer2.speed_configured</ax29:key>
+            <ax29:value>0</ax29:value>
+          </ax29:values>
+          <ax29:values xsi:type="ax29:ValueMappingBean">
+            <ax29:key>line.performance.pon.ds.total.packets</ax29:key>
+            <ax29:value xsi:nil="true"/>
+          </ax29:values>
+          <ax29:values xsi:type="ax29:ValueMappingBean">
+            <ax29:key>layer2.duplex_mode_configured</ax29:key>
+            <ax29:value>AUTO</ax29:value>
+          </ax29:values>
+          <ax29:values xsi:type="ax29:ValueMappingBean">
+            <ax29:key>layer2.duplex_mode</ax29:key>
+            <ax29:value>INVALID</ax29:value>
+          </ax29:values>
+          <ax29:values xsi:type="ax29:ValueMappingBean">
+            <ax29:key>line.operation.pon.range.unit</ax29:key>
+            <ax29:value>METER</ax29:value>
+          </ax29:values>
+          <ax29:values xsi:type="ax29:ValueMappingBean">
+            <ax29:key>dateinfo.data_collection_date</ax29:key>
+            <ax29:value>2020-09-24 03:15:21</ax29:value>
+          </ax29:values>
+          <ax29:values xsi:type="ax29:ValueMappingBean">
+            <ax29:key>line.performance.pon.ds.unicast.packets</ax29:key>
+            <ax29:value xsi:nil="true"/>
+          </ax29:values>
+          <ax29:values xsi:type="ax29:ValueMappingBean">
+            <ax29:key>line.performance.pon.us.es</ax29:key>
+            <ax29:value xsi:nil="true"/>
+          </ax29:values>
+          <ax29:values xsi:type="ax29:ValueMappingBean">
+            <ax29:key>realtime.message</ax29:key>
+            <ax29:value>Successful</ax29:value>
+          </ax29:values>
+          <ax29:values xsi:type="ax29:ValueMappingBean">
+            <ax29:key>line.operation.pon.ds.tx.power</ax29:key>
+            <ax29:value>3.9</ax29:value>
+          </ax29:values>
+          <ax29:values xsi:type="ax29:ValueMappingBean">
+            <ax29:key>realtime.dcpc.statuscode.popp</ax29:key>
+            <ax29:value>0</ax29:value>
+          </ax29:values>
+          <ax29:values xsi:type="ax29:ValueMappingBean">
+            <ax29:key>realtime.dcpc.statuscode.popo</ax29:key>
+            <ax29:value>0</ax29:value>
+          </ax29:values>
+          <ax29:values xsi:type="ax29:ValueMappingBean">
+            <ax29:key>line.info.pon.olt.laser.class</ax29:key>
+            <ax29:value xsi:nil="true"/>
+          </ax29:values>
+          <ax29:values xsi:type="ax29:ValueMappingBean">
+            <ax29:key>line.operation.pon.olt.state</ax29:key>
+            <ax29:value>IS</ax29:value>
+          </ax29:values>
+          <ax29:values xsi:type="ax29:ValueMappingBean">
+            <ax29:key>request.date</ax29:key>
+            <ax29:value>2020-09-24 03:15:20</ax29:value>
+          </ax29:values>
+          <ax29:values xsi:type="ax29:ValueMappingBean">
+            <ax29:key>realtime.dcpc.statuscode.ont</ax29:key>
+            <ax29:value>0</ax29:value>
+          </ax29:values>
+          <ax29:values xsi:type="ax29:ValueMappingBean">
+            <ax29:key>lineinfo.port</ax29:key>
+            <ax29:value>1-1-1-4#1-g1</ax29:value>
+          </ax29:values>
+          <ax29:values xsi:type="ax29:ValueMappingBean">
+            <ax29:key>line.operation.pon.ds.rx.power</ax29:key>
+            <ax29:value>0</ax29:value>
+          </ax29:values>
+          <ax29:values xsi:type="ax29:ValueMappingBean">
+            <ax29:key>realtime.dcpc.statuscode.layer2</ax29:key>
+            <ax29:value>0</ax29:value>
+          </ax29:values>
+          <ax29:values xsi:type="ax29:ValueMappingBean">
+            <ax29:key>line.performance.pon.measured.seconds</ax29:key>
+            <ax29:value>1600942521</ax29:value>
+          </ax29:values>
+          <ax29:values xsi:type="ax29:ValueMappingBean">
+            <ax29:key>line.info.pon.olt.ds.max.rate</ax29:key>
+            <ax29:value xsi:nil="true"/>
+          </ax29:values>
+          <ax29:values xsi:type="ax29:ValueMappingBean">
+            <ax29:key>line.operation.pon.ont.voltage</ax29:key>
+            <ax29:value>0</ax29:value>
+          </ax29:values>
+          <ax29:values xsi:type="ax29:ValueMappingBean">
+            <ax29:key>line.performance.pon.us.fec</ax29:key>
+            <ax29:value xsi:nil="true"/>
+          </ax29:values>
+          <ax29:values xsi:type="ax29:ValueMappingBean">
+            <ax29:key>realtime.dcpc.olt.state</ax29:key>
+            <ax29:value>IS</ax29:value>
+          </ax29:values>
+          <ax29:values xsi:type="ax29:ValueMappingBean">
+            <ax29:key>line.operation.pon.ont.state</ax29:key>
+            <ax29:value>IS</ax29:value>
+          </ax29:values>
+          <ax29:values xsi:type="ax29:ValueMappingBean">
+            <ax29:key>line.info.pon.olt.us.max.rate</ax29:key>
+            <ax29:value xsi:nil="true"/>
+          </ax29:values>
+          <ax29:values xsi:type="ax29:ValueMappingBean">
+            <ax29:key>line.operation.pon.alarms.active</ax29:key>
+            <ax29:value>4</ax29:value>
+          </ax29:values>
+          <ax29:values xsi:type="ax29:ValueMappingBean">
+            <ax29:key>request.status</ax29:key>
+            <ax29:value>0</ax29:value>
+          </ax29:values>
+          <ax29:values xsi:type="ax29:ValueMappingBean">
+            <ax29:key>line.info.pon.olt.serial</ax29:key>
+            <ax29:value>AB08021557      </ax29:value>
+          </ax29:values>
+          <ax29:values xsi:type="ax29:ValueMappingBean">
+            <ax29:key>line.operation.pon.up.time</ax29:key>
+            <ax29:value>608042</ax29:value>
+          </ax29:values>
+          <ax29:values xsi:type="ax29:ValueMappingBean">
+            <ax29:key>layer2.duplex_mode.code</ax29:key>
+            <ax29:value>-1</ax29:value>
+          </ax29:values>
+          <ax29:values xsi:type="ax29:ValueMappingBean">
+            <ax29:key>line.performance.pon.us.total.packets</ax29:key>
+            <ax29:value xsi:nil="true"/>
+          </ax29:values>
+          <ax29:values xsi:type="ax29:ValueMappingBean">
+            <ax29:key>line.operation.pon.last_disconnect.time</ax29:key>
+            <ax29:value xsi:nil="true"/>
+          </ax29:values>
+          <ax29:values xsi:type="ax29:ValueMappingBean">
+            <ax29:key>line.performance.pon.ds.fec</ax29:key>
+            <ax29:value xsi:nil="true"/>
+          </ax29:values>
+          <ax29:values xsi:type="ax29:ValueMappingBean">
+            <ax29:key>line.performance.pon.state</ax29:key>
+            <ax29:value>0</ax29:value>
+          </ax29:values>
+          <ax29:values xsi:type="ax29:ValueMappingBean">
+            <ax29:key>line.performance.pon.byte.unit</ax29:key>
+            <ax29:value>BYTES</ax29:value>
+          </ax29:values>
+          <ax29:values xsi:type="ax29:ValueMappingBean">
+            <ax29:key>line.performance.pon.us.unicast.packets</ax29:key>
+            <ax29:value xsi:nil="true"/>
+          </ax29:values>
+          <ax29:values xsi:type="ax29:ValueMappingBean">
+            <ax29:key>line.performance.pon.ds.es</ax29:key>
+            <ax29:value xsi:nil="true"/>
+          </ax29:values>
+          <ax29:values xsi:type="ax29:ValueMappingBean">
+            <ax29:key>line.info.pon.ont.serial</ax29:key>
+            <ax29:value>ALCLF8D863E8</ax29:value>
+          </ax29:values>
+          <ax29:values xsi:type="ax29:ValueMappingBean">
+            <ax29:key>request.id</ax29:key>
+            <ax29:value>9875550011:172.16.3.37:1600942520665:PON_DATA_COLLECTION</ax29:value>
+          </ax29:values>
+          <ax29:values xsi:type="ax29:ValueMappingBean">
+            <ax29:key>line.info.pon.ont.firmware.version</ax29:key>
+            <ax29:value>3FE53347ADAA04</ax29:value>
+          </ax29:values>
+          <ax29:values xsi:type="ax29:ValueMappingBean">
+            <ax29:key>line.performance.pon.us.bip8.error</ax29:key>
+            <ax29:value>0</ax29:value>
+          </ax29:values>
+          <ax29:values xsi:type="ax29:ValueMappingBean">
+            <ax29:key>line.operation.pon.ont.current</ax29:key>
+            <ax29:value>0</ax29:value>
+          </ax29:values>
+          <ax29:values xsi:type="ax29:ValueMappingBean">
+            <ax29:key>layer2.state</ax29:key>
+            <ax29:value>IS</ax29:value>
+          </ax29:values>
+          <ax29:values xsi:type="ax29:ValueMappingBean">
+            <ax29:key>line.info.pon.olt.vendor</ax29:key>
+            <ax29:value>Ligent Photonics</ax29:value>
+          </ax29:values>
+          <ax29:values xsi:type="ax29:ValueMappingBean">
+            <ax29:key>line.performance.pon.us.uas</ax29:key>
+            <ax29:value xsi:nil="true"/>
+          </ax29:values>
+          <ax29:values xsi:type="ax29:ValueMappingBean">
+            <ax29:key>lineinfo.dslam</ax29:key>
+            <ax29:value>ISAM_PON_5_5</ax29:value>
+          </ax29:values>
+          <ax29:values xsi:type="ax29:ValueMappingBean">
+            <ax29:key>line.info.pon.ont.vendor</ax29:key>
+            <ax29:value>ALCL</ax29:value>
+          </ax29:values>
+          <ax29:values xsi:type="ax29:ValueMappingBean">
+            <ax29:key>line.operation.pon.us.fec.enabled</ax29:key>
+            <ax29:value>1</ax29:value>
+          </ax29:values>
+          <ax29:values xsi:type="ax29:ValueMappingBean">
+            <ax29:key>line.operation.pon.range</ax29:key>
+            <ax29:value>5100</ax29:value>
+          </ax29:values>
+          <ax29:values xsi:type="ax29:ValueMappingBean">
+            <ax29:key>line.performance.pon.us.ses</ax29:key>
+            <ax29:value xsi:nil="true"/>
+          </ax29:values>
+        </ax29:entries>
+        <ax29:fieldNames>line.operation.pon.olt.voltage</ax29:fieldNames>
+        <ax29:fieldNames>line.operation.pon.ont.temperature</ax29:fieldNames>
+        <ax29:fieldNames>line.performance.pon.ds.bytes</ax29:fieldNames>
+        <ax29:fieldNames>line.operation.pon.last_disconnect.reason</ax29:fieldNames>
+        <ax29:fieldNames>line.performance.pon.ds.uas</ax29:fieldNames>
+        <ax29:fieldNames>line.performance.pon.ds.bip8.error</ax29:fieldNames>
+        <ax29:fieldNames>line.performance.pon.ds.ses</ax29:fieldNames>
+        <ax29:fieldNames>layer2.duplex_mode_configured.code</ax29:fieldNames>
+        <ax29:fieldNames>layer2.speed</ax29:fieldNames>
+        <ax29:fieldNames>line.operation.pon.us.tx.power</ax29:fieldNames>
+        <ax29:fieldNames>line.operation.pon.us.rx.power</ax29:fieldNames>
+        <ax29:fieldNames>completion.date</ax29:fieldNames>
+        <ax29:fieldNames>line.info.pon.olt.firmware.version</ax29:fieldNames>
+        <ax29:fieldNames>line.performance.date</ax29:fieldNames>
+        <ax29:fieldNames>realtime.dcpc.ont.state</ax29:fieldNames>
+        <ax29:fieldNames>line.info.pon.ont.model</ax29:fieldNames>
+        <ax29:fieldNames>line.operation.pon.olt.current</ax29:fieldNames>
+        <ax29:fieldNames>layer2.vlan</ax29:fieldNames>
+        <ax29:fieldNames>realtime.dcpc.statuscode.olt</ax29:fieldNames>
+        <ax29:fieldNames>line.info.pon.olt.model</ax29:fieldNames>
+        <ax29:fieldNames>lineinfo.id</ax29:fieldNames>
+        <ax29:fieldNames>line.performance.pon.us.bytes</ax29:fieldNames>
+        <ax29:fieldNames>layer2.svlan</ax29:fieldNames>
+        <ax29:fieldNames>line.operation.pon.ds.fec.enabled</ax29:fieldNames>
+        <ax29:fieldNames>line.operation.pon.olt.temperature</ax29:fieldNames>
+        <ax29:fieldNames>layer2.speed_configured</ax29:fieldNames>
+        <ax29:fieldNames>line.performance.pon.ds.total.packets</ax29:fieldNames>
+        <ax29:fieldNames>layer2.duplex_mode_configured</ax29:fieldNames>
+        <ax29:fieldNames>layer2.duplex_mode</ax29:fieldNames>
+        <ax29:fieldNames>line.operation.pon.range.unit</ax29:fieldNames>
+        <ax29:fieldNames>dateinfo.data_collection_date</ax29:fieldNames>
+        <ax29:fieldNames>line.performance.pon.ds.unicast.packets</ax29:fieldNames>
+        <ax29:fieldNames>line.performance.pon.us.es</ax29:fieldNames>
+        <ax29:fieldNames>realtime.message</ax29:fieldNames>
+        <ax29:fieldNames>line.operation.pon.ds.tx.power</ax29:fieldNames>
+        <ax29:fieldNames>realtime.dcpc.statuscode.popp</ax29:fieldNames>
+        <ax29:fieldNames>realtime.dcpc.statuscode.popo</ax29:fieldNames>
+        <ax29:fieldNames>line.info.pon.olt.laser.class</ax29:fieldNames>
+        <ax29:fieldNames>line.operation.pon.olt.state</ax29:fieldNames>
+        <ax29:fieldNames>request.date</ax29:fieldNames>
+        <ax29:fieldNames>realtime.dcpc.statuscode.ont</ax29:fieldNames>
+        <ax29:fieldNames>lineinfo.port</ax29:fieldNames>
+        <ax29:fieldNames>line.operation.pon.ds.rx.power</ax29:fieldNames>
+        <ax29:fieldNames>realtime.dcpc.statuscode.layer2</ax29:fieldNames>
+        <ax29:fieldNames>line.performance.pon.measured.seconds</ax29:fieldNames>
+        <ax29:fieldNames>line.info.pon.olt.ds.max.rate</ax29:fieldNames>
+        <ax29:fieldNames>line.operation.pon.ont.voltage</ax29:fieldNames>
+        <ax29:fieldNames>line.performance.pon.us.fec</ax29:fieldNames>
+        <ax29:fieldNames>realtime.dcpc.olt.state</ax29:fieldNames>
+        <ax29:fieldNames>line.operation.pon.ont.state</ax29:fieldNames>
+        <ax29:fieldNames>line.info.pon.olt.us.max.rate</ax29:fieldNames>
+        <ax29:fieldNames>line.operation.pon.alarms.active</ax29:fieldNames>
+        <ax29:fieldNames>request.status</ax29:fieldNames>
+        <ax29:fieldNames>line.info.pon.olt.serial</ax29:fieldNames>
+        <ax29:fieldNames>line.operation.pon.up.time</ax29:fieldNames>
+        <ax29:fieldNames>layer2.duplex_mode.code</ax29:fieldNames>
+        <ax29:fieldNames>line.performance.pon.us.total.packets</ax29:fieldNames>
+        <ax29:fieldNames>line.operation.pon.last_disconnect.time</ax29:fieldNames>
+        <ax29:fieldNames>line.performance.pon.ds.fec</ax29:fieldNames>
+        <ax29:fieldNames>line.performance.pon.state</ax29:fieldNames>
+        <ax29:fieldNames>line.performance.pon.byte.unit</ax29:fieldNames>
+        <ax29:fieldNames>line.performance.pon.us.unicast.packets</ax29:fieldNames>
+        <ax29:fieldNames>line.performance.pon.ds.es</ax29:fieldNames>
+        <ax29:fieldNames>line.info.pon.ont.serial</ax29:fieldNames>
+        <ax29:fieldNames>request.id</ax29:fieldNames>
+        <ax29:fieldNames>line.info.pon.ont.firmware.version</ax29:fieldNames>
+        <ax29:fieldNames>line.performance.pon.us.bip8.error</ax29:fieldNames>
+        <ax29:fieldNames>line.operation.pon.ont.current</ax29:fieldNames>
+        <ax29:fieldNames>layer2.state</ax29:fieldNames>
+        <ax29:fieldNames>line.info.pon.olt.vendor</ax29:fieldNames>
+        <ax29:fieldNames>line.performance.pon.us.uas</ax29:fieldNames>
+        <ax29:fieldNames>lineinfo.dslam</ax29:fieldNames>
+        <ax29:fieldNames>line.info.pon.ont.vendor</ax29:fieldNames>
+        <ax29:fieldNames>line.operation.pon.us.fec.enabled</ax29:fieldNames>
+        <ax29:fieldNames>line.operation.pon.range</ax29:fieldNames>
+        <ax29:fieldNames>line.performance.pon.us.ses</ax29:fieldNames>
+        <ax29:message>Successful</ax29:message>
+        <ax29:statusCode>0</ax29:statusCode>
+      </ns:return>
+    </ns:submitRequestResponse>
+  </soapenv:Body>
+</soapenv:Envelope>
