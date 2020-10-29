@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 import argparse
 from jira import JIRA
+#from client import JIRA
 
 ########################################################
 ### CONFIGURATION
@@ -39,7 +40,7 @@ def assign():
         print('ERROR: --issue needed')
         return
 
-    jira.assign_issue(args.issue, args.value)
+    jira.assign_issue(args.issue, account_id=args.value)
 
 ########################################################
 ### MAIN
