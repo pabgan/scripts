@@ -14,14 +14,15 @@ issues.md:
 	@echo "None." >> issues.md
 
 tickets-comments.csv:
-	cut tickets.csv -d',' -f1 | tail -n+2 > tickets-comments.csv
+	cut tickets.csv -d';' -f1 > tickets-comments.csv
 
-tickets.md: tickets.csv tickets-comments.csv
-	@#column -t -s',' tickets.csv > tickets.md
+tickets.csv:
+	@jira-turbo.py query --issues 'project = DSLE AND fixVersion = "V5.7.0 - Telkom SA" ORDER BY status DESC' > tickets.csv
+
+tickets.md: cat tickets.csv tickets-comments.csv
 	@echo "## Tickets" > tickets.md
-	cut -d',' -f2 --complement tickets.csv > tickets-aux.csv
-	./tickets.py tickets-aux.csv tickets-comments.csv > tickets-commented.csv
-	csv2md tickets-commented.csv >> tickets.md
+	./tickets.py tickets.csv tickets-comments.csv > tickets-commented.csv
+	csv2md -d';' tickets-commented.csv >> tickets.md
 
 sltp-table.md:
 	docx2txt < sltp.docm > sltp-all.txt
@@ -36,7 +37,7 @@ sltp-comments.md:
 sltp.md: sltp-table.md sltp-comments.md
 	@echo "## System Level Test Plan" > sltp.md
 	@cat sltp-comments.md >> sltp.md
-	@echo "\n\n" >> sltp.md
+	@echo "\n" >> sltp.md
 	@cat sltp-table.md >> sltp.md
 
 goodbye.md:
@@ -56,7 +57,7 @@ mail.md: clean header.md info.md issues.md tickets.md sltp.md goodbye.md
 	@cat goodbye.md >> mail.md
 
 clean:
-	rm -f mail.md jira-comment.md sltp.md sltp-table.md sltp-toc.txt sltp-all.txt tickets.md tickets-commented.csv
+	rm -f mail.md jira-comment.md sltp.md sltp-table.md sltp-toc.txt sltp-all.txt tickets.md tickets.csv tickets-commented.csv
 
 copy-html: mail.md
 	pandoc -t html mail.md | xclip
