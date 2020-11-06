@@ -15,8 +15,13 @@ def query():
         issue = jira.issue(args.issue)
 
         print(getattr(issue.fields, args.field))
+    if args.issues:
+        result = jira.search_issues(args.issues)
+        print('KEY;SUMMARY;UPDATED;ASSIGNEE;STATUS')
+        for issue in result:
+            print('{};{};{};{};{}'.format(issue.key, issue.fields.summary, issue.fields.updated, issue.fields.assignee, issue.fields.status))
     else:
-        print('Only --issue querying implemented yet')
+        print('%s option not implemented yet' %(args))
 
 def edit():
     if args.issue is None:
@@ -55,6 +60,7 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=desc)
     parser.add_argument("action", help="One of {}".format(', '.join(actions.keys())))
     parser.add_argument("--issue", required=False)
+    parser.add_argument("--issues", required=False)
     parser.add_argument("--field", required=False)
     parser.add_argument("--value", required=False)
     args = parser.parse_args()
