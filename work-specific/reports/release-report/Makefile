@@ -5,26 +5,33 @@ header.md:
 
 info.md:
 	@echo "## Info" > info.md
-	@echo "**Started on:**  " >> info.md
-	@echo "**Target date:**  " >> info.md
-	@echo "**Current binary:**  " >> info.md
+	@echo "**Start date:**  \" >> info.md
+	@echo "**Target date:**  \" >> info.md
+	@echo "**Tested binary:**  \" >> info.md
+	@echo "**Tested DB script:** \" >> info.md
+
 
 issues.md:
 	@echo "## Issues" > issues.md
 	@echo "None." >> issues.md
 
-tickets-comments.csv:
+tickets-comments.csv: tickets.csv
 	cut tickets.csv -d';' -f1 > tickets-comments.csv
+	sed -i '/KEY/d' tickets-comments.csv
+	sed -i 's/$$/;/' tickets-comments.csv
 
 tickets.csv:
 	@jira-turbo.py query --issues 'project = DSLE AND fixVersion = "V5.7.0 - Telkom SA" ORDER BY status DESC' > tickets.csv
 
-tickets.md: cat tickets.csv tickets-comments.csv
+tickets.md: tickets.csv tickets-comments.csv
 	@echo "## Tickets" > tickets.md
 	./tickets.py tickets.csv tickets-comments.csv > tickets-commented.csv
 	csv2md -d';' tickets-commented.csv >> tickets.md
 
-sltp-table.md:
+sltp.docm: "../sltp/System\ Test\ Plan.docm"
+	ln -s ../sltp/'System Test Plan.docm' sltp.docm
+
+sltp-table.md: sltp.docm
 	docx2txt < sltp.docm > sltp-all.txt
 	grep -A117 -E 'Table of Contents\s*[0-9]*' sltp-all.txt | grep -A1 -E '^[3-5]' > sltp-toc.txt
 	sed -i 's/\s\+[0-9]\+$$//' sltp-toc.txt
@@ -61,14 +68,3 @@ clean:
 
 copy-html: mail.md
 	pandoc -t html mail.md | xclip
-
-jira-comment.md: mail.md
-	@sed 's/-----*$$/----/' mail.md > jira-comment.md
-	@sed -i 's/##### /h5. /g' jira-comment.md
-	@sed -i 's/### /h3. /g' jira-comment.md
-	@sed -i 's/## /h2. /g' jira-comment.md
-	@sed -i 's/**/*/g' jira-comment.md
-	@sed -i '/| ---/d' jira-comment.md
-
-copy-jira: jira-comment.md
-	xclip < jira-comment.md
