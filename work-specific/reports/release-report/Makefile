@@ -20,16 +20,21 @@ tickets-comments.csv: tickets.csv
 	sed -i '/KEY/d' tickets-comments.csv
 	sed -i 's/$$/;/' tickets-comments.csv
 
-tickets.csv:
-	@jira-turbo.py query --issues 'project = DSLE AND fixVersion = "V5.7.0 - Telkom SA" ORDER BY status DESC' > tickets.csv
+tickets.csv: fix-versions.txt
+	@jira-turbo.py query --issues "project = DSLE AND fixVersion = <(cat fix-versions.txt) ORDER BY status DESC" > tickets.csv
 
 tickets.md: tickets.csv tickets-comments.csv
 	@echo "## Tickets" > tickets.md
 	./tickets.py tickets.csv tickets-comments.csv > tickets-commented.csv
 	csv2md -d';' tickets-commented.csv >> tickets.md
 
-sltp.docm: "../sltp/System\ Test\ Plan.docm"
-	ln -s ../sltp/'System Test Plan.docm' sltp.docm
+
+sltp.docm:
+	if [ ! -e '../sltp/System Test Plan.docm' ]; then \
+		mkdir -p ../sltp/ ; \
+		echo 'Not started.' > '../sltp/System Test Plan.docm' ; \
+	fi
+	ln -s '../sltp/System Test Plan.docm' sltp.docm
 
 sltp-table.md: sltp.docm
 	docx2txt < sltp.docm > sltp-all.txt
