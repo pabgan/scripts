@@ -81,7 +81,8 @@ get_token(){
 ######################
 
 submitRequest(){
-	echo "submitting request... to $ADDRESS"
+	echo "submitting request $envelope" 1>&2
+	echo "... to $ADDRESS" 1>&2
 	ACTION='urn:submitRequest'
 
 	H_CONTENT_TYPE="Content-Type: text/xml;charset=UTF-8"
@@ -90,7 +91,7 @@ submitRequest(){
 
 	#xmllint --format <( curl -V -H $H_CONTENT_TYPE -H $H_ACTION -H $H_AUTH --data @"$EXEC_PATH/$ENVELOPE" $ADDRESS/$ENDPOINT/services/realtime.realtimeHttpSoap11Endpoint/ )
 	#curl -H $H_CONTENT_TYPE -H $H_ACTION -H $H_AUTH --data @"$EXEC_PATH/$envelope" $ADDRESS/$ENDPOINT/services/realtime.realtimeHttpSoap11Endpoint/
-	curl -H "$H_CONTENT_TYPE" -H "$H_ACTION" -H "$H_AUTH" --data @"$EXEC_PATH/$envelope" $ADDRESS/$ENDPOINT/services/realtime.realtimeHttpSoap11Endpoint/
+	curl --silent -H "$H_CONTENT_TYPE" -H "$H_ACTION" -H "$H_AUTH" --data @"$EXEC_PATH/$envelope" $ADDRESS/$ENDPOINT/services/realtime.realtimeHttpSoap11Endpoint/
 }
 
 submitRequest_rest(){
@@ -114,7 +115,7 @@ if [[ -n $REST ]]; then
 		get_token
 		TOKEN=$(cat .token)
 	else
-		echo 'reusing token'
+		echo 'reusing token' 1>&2
 	fi
 else
 	SESSIONID=$(cat .sessionid)
@@ -123,13 +124,15 @@ else
 		get_sessionid
 		SESSIONID=$(cat .sessionid)
 	else
-		echo 'reusing sessionid'
+		echo 'reusing sessionid' 1>&2
 	fi
 fi
 
 # 2. Execute request
 case "$subcommand" in
 	submitRequest)
+		envelope=$1
+		shift
 		# Parse options to the submitRequest sub command
 		optstring="a:"
 		while getopts ${optstring} arg; do
@@ -138,7 +141,6 @@ case "$subcommand" in
 			esac
 		done
 		shift $((OPTIND -1))
-		envelope=$1
 
 		if [[ -n $REST ]]; then
 			submitRequest_rest $envelope
