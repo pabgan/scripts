@@ -12,10 +12,24 @@ from jira import JIRA
 ########################################################
 def query():
     if args.issue:
-        issue = jira.issue(args.issue)
+        if args.fields == 'all':
+            issue = jira.issue(args.issue)
 
-        print(getattr(issue.fields, args.field))
-    if args.issues:
+            fields_names = dir(issue.fields)
+            for field in fields_names:
+                if '__' not in field:
+                    print(field)
+                    print('----------')
+                    print(getattr(issue.fields, field))
+                    print('\n')
+#            for field in issue.fields.items():
+#                print(getattr(issue.fields, field))
+        else:
+            issue = jira.issue(args.issue, fields=args.fields)
+
+            for field in args.fields.split(','):
+                print(getattr(issue.fields, field))
+    elif args.issues:
         result = jira.search_issues(args.issues)
         print('KEY;SUMMARY;UPDATED;ASSIGNEE;STATUS')
         for issue in result:
@@ -61,7 +75,7 @@ if __name__ == "__main__":
     parser.add_argument("action", help="One of {}".format(', '.join(actions.keys())))
     parser.add_argument("--issue", required=False)
     parser.add_argument("--issues", required=False)
-    parser.add_argument("--field", required=False)
+    parser.add_argument("--fields", required=False)
     parser.add_argument("--value", required=False)
     args = parser.parse_args()
 
