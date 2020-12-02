@@ -1,14 +1,14 @@
-.PHONY: clean copy-jira-comment copy-mail
+.PHONY: clean
 
 header.md:
-	@echo 'Hi all.\n\nThis is the current status of ${CUS} ${VER} release validation:' > header.md
+	@echo 'Hi all.\n\nThis is the current status of ${CUSTOMER_NAME} ${CUSTOMER_VER} release validation:' > header.md
 
 info.md:
 	@echo "## Info" > info.md
-	@echo "**Start date:**  \" >> info.md
-	@echo "**Target date:**  \" >> info.md
-	@echo "**Tested binary:**  \" >> info.md
-	@echo "**Tested DB script:** \" >> info.md
+	@echo "**Start date:**  \\" >> info.md
+	@echo "**Target date:**  \\" >> info.md
+	@echo "**Tested binary:**  \\" >> info.md
+	@echo "**Tested DB script:** \\" >> info.md
 
 
 issues.md:
@@ -21,7 +21,7 @@ tickets-comments.csv: tickets.csv
 	sed -i 's/$$/;/' tickets-comments.csv
 
 tickets.csv: fix-versions.txt
-	@jira-turbo.py query --issues "project = DSLE AND fixVersion = <(cat fix-versions.txt) ORDER BY status DESC" > tickets.csv
+	jira-turbo.py query --issues 'project = DSLE AND fixVersion = $(shell cat fix-version.txt)' > tickets.csv
 
 tickets.md: tickets.csv tickets-comments.csv
 	@echo "## Tickets" > tickets.md
@@ -70,6 +70,3 @@ mail.md: clean header.md info.md issues.md tickets.md sltp.md goodbye.md
 
 clean:
 	rm -f mail.md jira-comment.md sltp.md sltp-table.md sltp-toc.txt sltp-all.txt tickets.md tickets.csv tickets-commented.csv
-
-copy-html: mail.md
-	pandoc -t html mail.md | xclip
