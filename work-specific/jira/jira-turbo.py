@@ -1,34 +1,41 @@
 #!/usr/bin/python3
-import argparse
+import argparse, os
 from jira import JIRA
 #from client import JIRA
 
 ########################################################
 ### CONFIGURATION
 ########################################################
+customfields = dict()
+customfields_file_path = os.path.join(os.getenv("HOME"), '.config/jira-turbo/customfields.csv')
+with open(customfields_file_path) as customfields_file:
+    for row in customfields_file:
+        pretty_name, custom_name = row.split(',')
+        # We want to be able to translate in both directions
+        customfields[pretty_name.strip()] = custom_name.strip()
+        customfields[custom_name.strip()] = pretty_name.strip()
+
+def issue_print(issue):
+    field_names = dir(issue.fields)
+    for field in field_names:
+        # Skip private attributes
+        if '__' not in field:
+            # Print the pretty name if available in customfields.csv or the one that comes from
+            # JIRA in other case
+            print('{}={}'.format(customfields.get(field, field), getattr(issue.fields, field)))
 
 ########################################################
 ### ACTIONS
 ########################################################
 def query():
     if args.issue:
-        if args.fields == 'all':
-            issue = jira.issue(args.issue)
-
-            fields_names = dir(issue.fields)
-            for field in fields_names:
-                if '__' not in field:
-                    print(field)
-                    print('----------')
-                    print(getattr(issue.fields, field))
-                    print('\n')
-#            for field in issue.fields.items():
-#                print(getattr(issue.fields, field))
+        if 'all' in args.fields_requested:
+            issue_print(jira.issue(args.issue))
         else:
-            issue = jira.issue(args.issue, fields=args.fields)
-
-            for field in args.fields.split(','):
-                print(getattr(issue.fields, field))
+            # Translate the field name requested by the user if available in customfields.csv or 
+            # else request it as is
+            fields_names = [ customfields.get(field_requested, field_requested)  for field_requested in args.fields_requested ]
+            issue_print(jira.issue(args.issue, fields=fields_names))
     elif args.issues:
         result = jira.search_issues(args.issues)
         print('KEY;SUMMARY;UPDATED;ASSIGNEE;STATUS')
@@ -79,6 +86,9 @@ if __name__ == "__main__":
     parser.add_argument("--value", required=False)
     args = parser.parse_args()
 
+    args.fields_requested = 'all'
+    if args.fields is not None:
+        args.fields_requested = args.fields.split(',')
 
     jira = JIRA('https://assia-inc.atlassian.net/')
     actions[args.action]()
