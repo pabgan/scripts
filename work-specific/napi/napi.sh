@@ -104,16 +104,26 @@ submitRequest_rest(){
 # 
 # 1. Get authorization if needed
 if [ -n "$CREDENTIALS" ]; then
+	# Tentatively remove credentials to avoid reusing 
+	# credentials from another user
+	# TODO: Store username to reuse them only if matching
+	# current username
+	rm -f .token .sessionid
 	#echo "parsing credentials..."
 	USERNAME=$(echo "$CREDENTIALS" | cut -d':' -f1)
 	PASSWORD=$(echo "$CREDENTIALS" | cut -d':' -f2)
 fi
+# Remove cached credentials if they are too old
+# in minutes
+max_old=10
+find .sessionid -mmin +$max_old -exec rm {} \; 2> /dev/null
+find .token -mmin +$max_old -exec rm {} \; 2> /dev/null
 if [[ -n $REST ]]; then
-	TOKEN=$(cat .token)
+	TOKEN=$(cat .token 2> /dev/null )
 
 	if [[ -z $TOKEN ]]; then
 		get_token
-		TOKEN=$(cat .token)
+		TOKEN=$(cat .token 2> /dev/null )
 	else
 		echo 'reusing token' 1>&2
 	fi
