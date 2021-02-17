@@ -41,7 +41,7 @@ while getopts ${optstring} arg; do
 		C) CREDENTIALS=$OPTARG ;;
 		V) SERVICE=$OPTARG ;;
 		K) NO_CACHE=1 ;;
-		c) rm .token .sessionid ;;
+		c) rm -f .token .sessionid; exit ;;
 	esac
 done
 shift $((OPTIND -1))
