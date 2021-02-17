@@ -15,7 +15,7 @@ issues.md:
 	@echo "## Issues" > issues.md
 	@echo "None." >> issues.md
 
-tickets-comments.csv: tickets.csv
+tickets-comments.csv:
 	cut tickets.csv -d';' -f1 > tickets-comments.csv
 	sed -i '/KEY/d' tickets-comments.csv
 	sed -i 's/$$/;/' tickets-comments.csv
