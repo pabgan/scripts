@@ -21,7 +21,7 @@ tickets-comments.csv: tickets.csv
 	sed -i 's/$$/;/' tickets-comments.csv
 
 tickets.csv: fix-versions.txt
-	jira-turbo.py query --issues 'project = DSLE AND fixVersion = $(shell cat fix-version.txt)' > tickets.csv
+	jira_turbo.py query --issues 'project = DSLE AND fixVersion in ( $(shell cat fix-versions.txt) ) and status!=CLOSED' > tickets.csv
 
 tickets.md: tickets.csv tickets-comments.csv
 	@echo "## Tickets" > tickets.md
