@@ -20,7 +20,7 @@ echo "\n================= OTHER THINGS DONE ================="
 jrnl -from "\"$days_to_report days ago at 15:50\""
 
 echo "================== THINGS TO TELL ==================="
-todo-txt -d $XDG_CONFIG_HOME/todo/config ls @scrum | head -n -2
+todo-txt -x -d $HOME/.config/todo/config ls @scrum | head -n -2
 
 echo "\n===================== COMMITS ======================="
 # Execute a command from another directory [1]
