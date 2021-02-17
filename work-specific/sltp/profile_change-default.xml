@@ -1,0 +1,16 @@
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:impl="http://impl.realtime.dslo.assia.com" xmlns:xsd="http://api.realtime.dslo.assia.com/xsd" xmlns:xsd1="http://model.napi.dslo.assia.com/xsd">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <impl:submitRequest>
+         <impl:request>
+            <xsd:additionalParameters>
+               <xsd1:type>profile</xsd1:type>
+               <xsd1:value>profile.service.product.default</xsd1:value>
+            </xsd:additionalParameters>
+            <xsd:entityID>#line_id#</xsd:entityID>
+            <xsd:requestType>PROFILE_CHANGE</xsd:requestType>
+         </impl:request>
+         <impl:timeout>240</impl:timeout>
+      </impl:submitRequest>
+   </soapenv:Body>
+</soapenv:Envelope>
