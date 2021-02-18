@@ -50,5 +50,8 @@ for name in $( echo "${output}" | grep -oE '@[[:alpha:]]+' ); do
 	fi
 done
 
+# Remove forcing new lines
+output=$( echo "${output}" | sed "s/\\\s*$//g" )
+
 # Print result
 echo "${output}"
