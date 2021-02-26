@@ -61,7 +61,7 @@ tmp_prov = original_prov.copy()
 for line in port_info_inserts:
     sp = line["SERVICE_PRODUCT"]
     if sp not in wanted_service_products or tmp_prov[sp] > max_lines_per_sp:
-                logging.debug("Adding line to pool: %s" % (line))
+        logging.debug("Adding line to pool: %s" % (line))
         pool.append(line)
         tmp_prov[sp] = tmp_prov[sp] - 1
 
@@ -69,10 +69,10 @@ for line in port_info_inserts:
 #     lines from the pool as needed
 for sp in wanted_service_products:
     logging.debug("---------------------------------------------")
-        logging.debug("Checking %s" % (sp))
+    logging.debug("Checking %s" % (sp))
     while len(pool) > 0 and tmp_prov[sp] < max_lines_per_sp:
         logging.debug(".............................................")
-                logging.debug("Needs one more line because: pool = %s & tmp_prov[sp] = %s" % (len(pool), tmp_prov[sp]))
+        logging.debug("Needs one more line because: pool = %s & tmp_prov[sp] = %s" % (len(pool), tmp_prov[sp]))
         line = pool.pop()
         logging.debug("Assigning line: %s" % (line))
         original_sp = line["SERVICE_PRODUCT"]
