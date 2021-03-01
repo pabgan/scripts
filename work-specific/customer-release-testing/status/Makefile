@@ -30,11 +30,9 @@ tickets.md: tickets.csv tickets-comments.csv
 
 
 sltp.docm:
-	if [ ! -e '../sltp/System Test Plan.docm' ]; then \
-		mkdir -p ../sltp/ ; \
-		echo 'Not started.' > '../sltp/System Test Plan.docm' ; \
-	fi
-	ln -s '../sltp/System Test Plan.docm' sltp.docm
+	rclone copy expresse_sharepoint:"QA/02. Templates/System Test Plan.docm" ../sltp/
+	mv "../sltp/System Test Plan.docm" "../sltp/System Test Plan - ${CUSTOMER_NAME} ${CUSTOMER_VER}.docm"
+	ln -s "../sltp/System Test Plan - ${CUSTOMER_NAME} ${CUSTOMER_VER}.docm" sltp.docm
 
 sltp-table.md: sltp.docm
 	docx2txt < sltp.docm > sltp-all.txt
