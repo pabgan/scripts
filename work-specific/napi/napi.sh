@@ -81,6 +81,7 @@ get_token(){
 ######################
 
 submitRequest(){
+	envelope=$1
 	echo "submitting request $envelope" 1>&2
 	echo "... to $ADDRESS" 1>&2
 	ACTION='urn:submitRequest'
@@ -95,7 +96,36 @@ submitRequest(){
 }
 
 submitRequest_rest(){
-	ACTION='urn:submitRequest'
+	additional_parameters=$1
+	TYPE='POST'
+	URI='provisioning/v1/lines'
+
+	ADDITIONAL_PARAMETERS='{ 
+		    "lineId":"DSLE220760",
+		    "port":"1-1-40",
+		    "dslamName":"ISAM_PON",
+		    "serviceProduct":"ASSIA_BASIC",
+		    "additionalParameters": [
+			{
+			    "key": "NETWORK",
+			    "value": "DEFAULT"
+			},
+			{
+			    "key": "PE_ENABLED",
+			    "value": "1"
+			},
+			{
+			    "key": "PO_ENABLED",
+			    "value": "1"
+			},
+			{
+			    "key": "TECHNOLOGY",
+			    "value": "PON"
+			}
+		    ]
+	}'
+
+	curl -k --request $TYPE --url $ADDRESS/$ENDPOINT/rest/$URI --header 'accept: application/json' --header "Authorization: bearer $TOKEN" --header 'cache-control: no-cache' --header 'content-type: application/json' -d $ADDITIONAL_PARAMETERS | python -m json.tool
 }
 
 
@@ -141,7 +171,7 @@ fi
 # 2. Execute request
 case "$subcommand" in
 	submitRequest)
-		envelope=$1
+		payload=$1
 		shift
 		# Parse options to the submitRequest sub command
 		optstring="a:"
@@ -153,9 +183,9 @@ case "$subcommand" in
 		shift $((OPTIND -1))
 
 		if [[ -n $REST ]]; then
-			submitRequest_rest $envelope
+			submitRequest_rest $payload
 		else
-			submitRequest $envelope
+			submitRequest $payload
 		fi
 esac
 
