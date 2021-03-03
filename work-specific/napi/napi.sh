@@ -34,7 +34,6 @@ PROTOCOL='http'
 while getopts ${optstring} arg; do
 	case ${arg} in
 		h) usage ;;
-		R) REST=1 ;;
 		S) SERVER=$OPTARG ;;
 		P) PORT=$OPTARG ;;
 		E) ENDPOINT=$OPTARG ;;
@@ -72,12 +71,6 @@ get_sessionid(){
 	xmllint --format <(curl --silent --header "Content-Type: text/xml;charset=UTF-8" --header "SOAPAction:$ACTION" --data @<(echo "$LOGIN_ENV") $ADDRESS/$ENDPOINT/services/authentication.authenticationHttpSoap11Endpoint/ ) | sed -n -e  's/.\+sessionId>\(.\+\)<\/.\+/\1/p' > .sessionid
 }
 
-get_token(){
-	#echo "renewing token..."
-	curl --silent -u "rest-client-trusted:gnQB_jC-XU8RB*3#"  -k -X POST -d 'username=administrator&password=assia&grant_type=password' $ADDRESS/$ENDPOINT/oauth/token | cut -d'"' -f4 > .token
-	#echo "got: '$TOKEN'"
-}
-
 ######################
 
 submitRequest(){
@@ -95,39 +88,6 @@ submitRequest(){
 	curl --silent -H "$H_CONTENT_TYPE" -H "$H_ACTION" -H "$H_AUTH" --data @"$EXEC_PATH/$envelope" $ADDRESS/$ENDPOINT/services/realtime.realtimeHttpSoap11Endpoint/
 }
 
-submitRequest_rest(){
-	additional_parameters=$1
-	TYPE='POST'
-	URI='provisioning/v1/lines'
-
-	ADDITIONAL_PARAMETERS='{ 
-		    "lineId":"DSLE220760",
-		    "port":"1-1-40",
-		    "dslamName":"ISAM_PON",
-		    "serviceProduct":"ASSIA_BASIC",
-		    "additionalParameters": [
-			{
-			    "key": "NETWORK",
-			    "value": "DEFAULT"
-			},
-			{
-			    "key": "PE_ENABLED",
-			    "value": "1"
-			},
-			{
-			    "key": "PO_ENABLED",
-			    "value": "1"
-			},
-			{
-			    "key": "TECHNOLOGY",
-			    "value": "PON"
-			}
-		    ]
-	}'
-
-	curl -k --request $TYPE --url $ADDRESS/$ENDPOINT/rest/$URI --header 'accept: application/json' --header "Authorization: bearer $TOKEN" --header 'cache-control: no-cache' --header 'content-type: application/json' -d $ADDITIONAL_PARAMETERS | python -m json.tool
-}
-
 
 ##########################
 # MAIN
@@ -138,7 +98,7 @@ if [ -n "$CREDENTIALS" ]; then
 	# credentials from another user
 	# TODO: Store username to reuse them only if matching
 	# current username
-	rm -f .token .sessionid
+	rm -f .sessionid
 	#echo "parsing credentials..."
 	USERNAME=$(echo "$CREDENTIALS" | cut -d':' -f1)
 	PASSWORD=$(echo "$CREDENTIALS" | cut -d':' -f2)
@@ -147,25 +107,13 @@ fi
 # in minutes
 max_old=10
 find .sessionid -mmin +$max_old -exec rm {} \; 2> /dev/null
-find .token -mmin +$max_old -exec rm {} \; 2> /dev/null
-if [[ -n $REST ]]; then
-	TOKEN=$(cat .token 2> /dev/null )
+SESSIONID=$(cat .sessionid)
 
-	if [[ -z $TOKEN ]]; then
-		get_token
-		TOKEN=$(cat .token 2> /dev/null )
-	else
-		echo 'reusing token' 1>&2
-	fi
-else
+if [ -z $SESSIONID ]; then
+	get_sessionid
 	SESSIONID=$(cat .sessionid)
-
-	if [ -z $SESSIONID ]; then
-		get_sessionid
-		SESSIONID=$(cat .sessionid)
-	else
-		echo 'reusing sessionid' 1>&2
-	fi
+else
+	echo 'reusing sessionid' 1>&2
 fi
 
 # 2. Execute request
@@ -182,11 +130,7 @@ case "$subcommand" in
 		done
 		shift $((OPTIND -1))
 
-		if [[ -n $REST ]]; then
-			submitRequest_rest $payload
-		else
-			submitRequest $payload
-		fi
+		submitRequest $payload
 esac
 
 #curl -s -k -H $H_CONTENT_TYPE -H $H_ACCEPT -H $H_AUTHORIZATION "$ADDRESS/$ENDPOINT/rest/realtime/v1/reports/single/PON_DATA_COLLECTION/DSLE%2022232%2F0" -d $ADDITIONAL_PARAMETERS
