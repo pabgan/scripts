@@ -21,7 +21,7 @@ EXEC_PATH=$(pwd)
 # PARSE INPUT
 # https://sookocheff.com/post/bash/parsing-bash-script-arguments-with-shopts/
 
-optstring="hRS:P:E:C:V:Kc"
+optstring="hS:P:E:C:V:Kc"
 
 # Set defaults
 SERVER=$CUSTOMER_ENV
