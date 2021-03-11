@@ -30,7 +30,7 @@ EXEC_PATH=$(pwd)
 ##########################
 # PARSE INPUT
 # https://sookocheff.com/post/bash/parsing-bash-script-arguments-with-shopts/
-optstring="hS:P:E:C:V:KA:U:O:c"
+optstring="hS:P:E:C:V:KA:U:O:vc"
 
 # Set defaults
 SERVER=$CUSTOMER_ENV
@@ -52,6 +52,7 @@ while getopts ${optstring} arg; do
 		A) ACTION=$OPTARG ;;
 		U) URI=$OPTARG ;;
 		O) OPTIONS=$OPTARG ;;
+		v) VERBOSE=true ;;
 		c) rm -f .token .sessionid; exit ;;
 	esac
 done
@@ -64,9 +65,9 @@ ADDRESS="${PROTOCOL}://${SERVER}.assia-inc.com:${PORT}"
 # AUXILIARY FUNCTIONS
 
 get_token(){
-	#echo "renewing token..."
+	if [[ $VERBOSE ]]; then echo "# renewing token..." ; fi
+	if [[ $VERBOSE ]]; then echo "$ curl --silent -u \"rest-client-trusted:gnQB_jC-XU8RB*3#\"  -k -X POST -d \"username=$USERNAME&password=$PASSWORD&grant_type=password\" $ADDRESS/$ENDPOINT/oauth/token" ; fi
 	curl --silent -u "rest-client-trusted:gnQB_jC-XU8RB*3#"  -k -X POST -d "username=$USERNAME&password=$PASSWORD&grant_type=password" $ADDRESS/$ENDPOINT/oauth/token | cut -d'"' -f4 > .token
-	#echo "got: '$TOKEN'"
 }
 
 ##########################
@@ -83,24 +84,36 @@ if [ -n "$CREDENTIALS" ]; then
 	USERNAME=$(echo "$CREDENTIALS" | cut -d':' -f1)
 	PASSWORD=$(echo "$CREDENTIALS" | cut -d':' -f2)
 fi
-# Remove cached credentials if they are too old
-# in minutes
+## 1.1 Remove cached credentials if they are too old
+# Variable below expressed in minutes
 max_old=10
 find .token -mmin +$max_old -exec rm {} \; 2> /dev/null
 TOKEN=$(cat .token 2> /dev/null )
 
+## 1.2 Get new credentials if now there are none cached
 if [[ -z $TOKEN ]]; then
 	get_token
 	TOKEN=$(cat .token 2> /dev/null )
 else
-	echo 'reusing token' 1>&2
+	if [[ $VERBOSE ]]; then echo "# reusing token" ; fi
+fi
+
+## 1.3 Exit with error if credentials could not be procured
+if [[ -z $TOKEN ]]; then
+	echo "--- CRITICAL: could not get token. Can not proceed further. ---" >&2
+	exit 1
 fi
 
 # 2. Execute request
 ADDITIONAL_PARAMETERS=$1
 if [[ ! -z $ADDITIONAL_PARAMETERS ]]; then
-	curl -k --request $ACTION --url $ADDRESS/$ENDPOINT/$URI --header 'accept: application/json' --header "Authorization: bearer $TOKEN" --header 'cache-control: no-cache' --header 'content-type: application/json' -d $ADDITIONAL_PARAMETERS $OPTIONS | python -m json.tool
+	if [[ $VERBOSE ]]; then echo "$ curl --silent -k --request $ACTION --url $ADDRESS/$ENDPOINT/$URI --header 'accept: application/json' --header \"Authorization: bearer $TOKEN\" --header 'cache-control: no-cache' --header 'content-type: application/json' $OPTIONS" ; fi
+	if [[ $VERBOSE ]]; then echo "----------------- response -----------------" ; fi
+	curl --silent -k --request $ACTION --url $ADDRESS/$ENDPOINT/$URI --header 'accept: application/json' --header "Authorization: bearer $TOKEN" --header 'cache-control: no-cache' --header 'content-type: application/json' -d $ADDITIONAL_PARAMETERS $OPTIONS
+	if [[ $VERBOSE ]]; then echo "----------------- response -----------------" ; fi
 else
-	echo "curl -k --request $ACTION --url $ADDRESS/$ENDPOINT/$URI --header 'accept: application/json' --header \"Authorization: bearer $TOKEN\" --header 'cache-control: no-cache' --header 'content-type: application/json' $OPTIONS"
-	curl -k --request $ACTION --url $ADDRESS/$ENDPOINT/$URI --header 'accept: application/json' --header "Authorization: bearer $TOKEN" --header 'cache-control: no-cache' --header 'content-type: application/json' $OPTIONS
+	if [[ $VERBOSE ]]; then echo "$ curl --silent -k --request $ACTION --url $ADDRESS/$ENDPOINT/$URI --header 'accept: application/json' --header \"Authorization: bearer $TOKEN\" --header 'cache-control: no-cache' --header 'content-type: application/json' $OPTIONS" ; fi
+	if [[ $VERBOSE ]]; then echo "----------------- response -----------------" ; fi
+	curl --silent -k --request $ACTION --url $ADDRESS/$ENDPOINT/$URI --header 'accept: application/json' --header "Authorization: bearer $TOKEN" --header 'cache-control: no-cache' --header 'content-type: application/json' $OPTIONS
+	if [[ $VERBOSE ]]; then echo "\n----------------- response -----------------" ; fi
 fi
