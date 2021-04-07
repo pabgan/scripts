@@ -14,6 +14,7 @@ get_sltp() {
 	mkdir -p sltp
 	pushd sltp
 	rclone copy expresse_sharepoint:"QA/02. Templates/System Test Plan.docm" .
+	mv "System Test Plan.docm" "System Test Plan - ${CUSTOMER_NAME} ${CUSTOMER_VER}.docm"
 	popd
 }
 

@@ -30,8 +30,6 @@ tickets.md: tickets.csv tickets-comments.csv
 
 
 sltp.docm:
-	rclone copy expresse_sharepoint:"QA/02. Templates/System Test Plan.docm" ../sltp/
-	mv "../sltp/System Test Plan.docm" "../sltp/System Test Plan - ${CUSTOMER_NAME} ${CUSTOMER_VER}.docm"
 	ln -s "../sltp/System Test Plan - ${CUSTOMER_NAME} ${CUSTOMER_VER}.docm" sltp.docm
 
 sltp-table.md: sltp.docm
