@@ -18,7 +18,6 @@ get_sltp() {
 	popd
 }
 
-#TODO: aplicarle docx2txt
 change_percentiles() {
 	ssh user@$CUSTOMER_ENV.assia-inc.com "
 		sed -i 's/pon.pe.estimator.throughput.stats.min.num.percentiles.*=.*/pon.pe.estimator.throughput.stats.min.num.percentiles = 2/' ~/install/server/config/pon.pe.estimator.properties
