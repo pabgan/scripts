@@ -9,7 +9,14 @@ get_deliverables() {
 	wget_sqls
 	popd
 }
-#TODO: Descargar NCD
+
+get_sltp() {
+	mkdir -p sltp
+	pushd sltp
+	rclone copy expresse_sharepoint:"QA/02. Templates/System Test Plan.docm" .
+	popd
+}
+
 #TODO: aplicarle docx2txt
 change_percentiles() {
 	ssh user@$CUSTOMER_ENV.assia-inc.com "
@@ -17,6 +24,12 @@ change_percentiles() {
 		sed -i 's/pon.sr.throughput.stats.min.num.percentiles.*=.*/pon.sr.throughput.stats.min.num.percentiles = 2/' ~/install/server/config/pon.sr.properties ;;
 		ant -f ~/install/server/build.xml pe restart
 		"
+}
+
+setup() {
+	get_deliverables
+	get_sltp
+	change_percentiles
 }
 
 #######################
@@ -31,3 +44,5 @@ change_percentiles() {
 #######################
 # 2. Tear down
 #TODO: Cerrar release
+
+"$@"
