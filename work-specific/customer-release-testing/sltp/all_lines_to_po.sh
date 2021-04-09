@@ -18,3 +18,4 @@ echo 'Update PO_STATE set source = 0;'
 echo 'Commit;'
 echo 'exec NETWORK_STATISTICS_MANAGER.POPULATE_LINE_INFO_SNAPSHOT;'
 echo "exec DBMS_MVIEW.REFRESH('V_LINE_CARD_INFO_LATEST_PM');"
+echo "quit"
