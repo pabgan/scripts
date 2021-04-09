@@ -60,17 +60,17 @@ all_lines_to_po() {
 
 	echo "## Generating all_lines_to_po.sql"
 	sql_file='all_lines_to_po.sql'
-	#all_lines_to_po.sh > $work_path/$sql_file
+	all_lines_to_po.sh > $work_path/$sql_file
 
 	echo "## Sending it all to db-ref"
 	db_server='db-ref'
 	remote_dir='pganuza'
-	#rsync -rvzh $work_path $db_server:pganuza/
+	rsync -rvzh $work_path $db_server:pganuza/
 
 	echo "## Executing remotely"
 	log_file='all_lines_to_po.log'
+	#TODO: send altpo.sh also and include it in GIT
 	ssh $db_server pganuza/po/altpo.sh ${CUSTOMER_DB} | tee "$work_path/$log_file"
-	#ssh $db_server "sh 'source ~/.bash_profile; sqlplus ${CUSTOMER_DB}/assia @$remote_dir/$sql_file'" | tee "$sql_path/$log_file"
 	echo "----"
 }
 
