@@ -21,7 +21,8 @@ tickets-comments.csv:
 	sed -i 's/$$/;/' tickets-comments.csv
 
 tickets.csv: fix-versions.txt
-	jira_turbo.py query --issues 'project = DSLE AND fixVersion in ( $(shell cat fix-versions.txt) ) and status!=CLOSED' > tickets.csv
+	#jira_turbo.py query --issues 'project = DSLE AND fixVersion in ( $(shell cat fix-versions.txt) ) and status!=CLOSED' > tickets.csv
+	jira_turbo.py query --issues 'project = DSLE AND fixVersion in ( $(shell cat fix-versions.txt) ) ' > tickets.csv
 
 tickets.md: tickets.csv tickets-comments.csv
 	@echo "## Tickets" > tickets.md
@@ -36,7 +37,8 @@ sltp-table.md: sltp.docm
 	docx2txt < sltp.docm > sltp-all.txt
 	grep -A117 -E 'Table of Contents\s*[0-9]*' sltp-all.txt | grep -A1 -E '^[3-5]' > sltp-toc.txt
 	sed -i 's/\s\+[0-9]\+$$//' sltp-toc.txt
-	./sltp.py sltp-toc.txt > sltp-table.md
+	@echo "##### Results" > sltp-table.md
+	./sltp.py sltp-toc.txt >> sltp-table.md
 
 sltp-comments.md:
 	@echo "##### Comments" > sltp-comments.md
@@ -45,7 +47,7 @@ sltp-comments.md:
 sltp.md: sltp-table.md sltp-comments.md
 	@echo "## System Level Test Plan" > sltp.md
 	@cat sltp-comments.md >> sltp.md
-	@echo "\n" >> sltp.md
+	@echo "" >> sltp.md
 	@cat sltp-table.md >> sltp.md
 
 goodbye.md:
