@@ -26,18 +26,30 @@ change_percentiles() {
 		"
 }
 
+update_topology() {
+	#TODO
+	echo '# update_topology: NOT IMPLEMENTED YET!!'
+}
+
 deploy_simulators() {
 	#TODO
+	echo '# deploy_simulators: NOT IMPLEMENTED YET!!'
 }
 
 deploy_ansible() {
 	#TODO
+	echo '# deploy_ansible: NOT IMPLEMENTED YET!!'
+}
+
+refresh_rclone_token() {
 }
 
 setup() {
+	refresh_rclone_token
 	get_deliverables
 	get_sltp
 	change_percentiles
+	update_topology
 	deploy_simulators #? It might be that this is already done when deploying release
 	deploy_ansible
 }
@@ -60,29 +72,77 @@ all_lines_to_po() {
 
 	echo "## Generating all_lines_to_po.sql"
 	sql_file='all_lines_to_po.sql'
-	all_lines_to_po.sh > $work_path/$sql_file
+	./sltp/all_lines_to_po.sh > $work_path/$sql_file
 
 	echo "## Sending it all to db-ref"
 	db_server='db-ref'
 	remote_dir='pganuza'
-	rsync -rvzh $work_path $db_server:pganuza/
+	rsync -rvzh $work_path $db_server:$remote_dir/
 
 	echo "## Executing remotely"
 	log_file='all_lines_to_po.log'
 	#TODO: send altpo.sh also and include it in GIT
-	ssh $db_server pganuza/po/altpo.sh ${CUSTOMER_DB} | tee "$work_path/$log_file"
+	ssh $db_server $remote_dir/po/altpo.sh ${CUSTOMER_DB} | tee "$work_path/$log_file"
 	echo "----"
 }
 
 prepare_sltp() {
 	#TODO: whitelist para OI/Colombia
-	#TODO: all lines to PO
+	all_lines_to_po
 }
-#TODO: diff NCD
-#TODO: diff SLTP
-#TODO: execute ncd_auto_tests
-#TODO: execute napi_auto_tests
-#TODO: execute selenium_auto_tests
+
+download_ncd_old (){
+	version=$1
+	cp $CUSTOMER_DIR/../onedrive/04.*Projects/Releases/*$version*/02.*Delivered/*${version}*onventions* .
+}
+
+download_ncd_new (){
+	cp $CUSTOMER_DIR/../onedrive/01.*Customer_documentation/01.*Data_Conventions/*onventions* .
+}
+
+diff_ncd() {
+	# 1. Get documents
+	#TODO: retrieve version numbers from where?
+	version_old=$2
+	(cd $CUSTOMER_DIR/..; mount-onedrive & )
+
+	pushd sltp
+	#download_ncd_old $version_old
+	#download_ncd_new
+
+	# 2. Convert them to txt
+	pdftotext *$version_old*onventions*.pdf ncd_old.txt
+	docx2txt *onventions*.docx
+	mv *onventions*.txt ncd_new.txt
+	diff ncd_old.txt ncd_new.txt > ncd.diff
+
+	popd
+}
+
+jenkins_url='http://rc-build-01.assia-inc.com:8080'
+user='pganuza'
+pass='Dr=G+mDD'
+execute_jenkins_job() {
+	job_name=$1
+
+	crumbIssuer_url='crumbIssuer/api/xml?xpath=concat\(//crumbRequestField,%22:%22,//crumb\)'
+	crumb=$(curl -u "$user:$pass" $jenkins_URL/$crumbIssuer_url)
+	#curl -u "$user:$pass" -H "$crumb" -X POST $jenkins_url/job/$job_name/build
+}
+
+execute_sltp() {
+	#TODO: execute ncd_auto_tests
+	#TODO: execute napi_auto_tests
+	#TODO: execute selenium_auto_tests
+	#TODO: execute_sltp_tests()
+}
+
+diff_sltp() {
+
+	#TODO: download_previous_sltp_results()
+	#TODO: download_new_sltp_results()
+}
+
 
 #######################
 # 2. Tear down
