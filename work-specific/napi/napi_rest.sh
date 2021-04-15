@@ -14,6 +14,7 @@ usage(){
 	echo "	-K NO_CACHE"
 	echo "	-A ACTION"
 	echo "	-U URI"
+	echo "	-v VERBOSE"
 	echo "	-c --> cleans token"
 	exit 1
 }
@@ -53,7 +54,7 @@ while getopts ${optstring} arg; do
 		U) URI=$OPTARG ;;
 		O) OPTIONS=$OPTARG ;;
 		v) VERBOSE=true ;;
-		c) rm -f .token .sessionid; exit ;;
+		c) rm -f .token ; exit ;;
 	esac
 done
 shift $((OPTIND -1))
@@ -115,5 +116,5 @@ else
 	if [[ $VERBOSE ]]; then echo "$ curl --silent -k --request $ACTION --url $ADDRESS/$ENDPOINT/$URI --header 'accept: application/json' --header \"Authorization: bearer $TOKEN\" --header 'cache-control: no-cache' --header 'content-type: application/json' $OPTIONS" ; fi
 	if [[ $VERBOSE ]]; then echo "----------------- response -----------------" ; fi
 	curl --silent -k --request $ACTION --url $ADDRESS/$ENDPOINT/$URI --header 'accept: application/json' --header "Authorization: bearer $TOKEN" --header 'cache-control: no-cache' --header 'content-type: application/json' $OPTIONS
-	if [[ $VERBOSE ]]; then echo "\n----------------- response -----------------" ; fi
+	if [[ $VERBOSE ]]; then echo "----------------- response -----------------" ; fi
 fi

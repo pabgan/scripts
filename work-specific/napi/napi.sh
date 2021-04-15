@@ -4,7 +4,18 @@
 # HELP
 
 usage(){
-	echo "./$(basename $0) -h --> shows usage"
+	echo "$(basename $0) [OPTION]..."
+	echo "	-h --> shows usage"
+	echo "	-S SERVER"
+	echo "	-P PORT"
+	echo "	-E ENDPOINT"
+	echo "	-C CREDENTIALS"
+	echo "	-V SERVICE"
+	echo "	-K NO_CACHE"
+	echo "	-A ACTION"
+	echo "	-U URI"
+	echo "	-v VERBOSE"
+	echo "	-c --> cleans token"
 	exit 1
 }
 
@@ -21,7 +32,7 @@ EXEC_PATH=$(pwd)
 # PARSE INPUT
 # https://sookocheff.com/post/bash/parsing-bash-script-arguments-with-shopts/
 
-optstring="hS:P:E:C:V:Kc"
+optstring="hS:P:E:C:V:Kvc"
 
 # Set defaults
 SERVER=$CUSTOMER_ENV
@@ -40,6 +51,7 @@ while getopts ${optstring} arg; do
 		C) CREDENTIALS=$OPTARG ;;
 		V) SERVICE=$OPTARG ;;
 		K) NO_CACHE=1 ;;
+		v) VERBOSE=true ;;
 		c) rm -f .token .sessionid; exit ;;
 	esac
 done
@@ -64,10 +76,10 @@ LOGIN_ENV="<soapenv:Envelope xmlns:soapenv='http://schemas.xmlsoap.org/soap/enve
 </soapenv:Envelope>"
 
 get_sessionid(){
-	#echo "getting session ID for $USERNAME:$PASSWORD..."
+	if [[ $VERBOSE ]]; then echo "renewing sessionid..." ; fi
 
 	ACTION='urn:login'
-
+	if [[ $VERBOSE ]]; then echo "curl --silent --header \"Content-Type: text/xml;charset=UTF-8\" --header \"SOAPAction:$ACTION\" --data @<(echo \"$LOGIN_ENV\") $ADDRESS/$ENDPOINT/services/authentication.authenticationHttpSoap11Endpoint/" ; fi
 	xmllint --format <(curl --silent --header "Content-Type: text/xml;charset=UTF-8" --header "SOAPAction:$ACTION" --data @<(echo "$LOGIN_ENV") $ADDRESS/$ENDPOINT/services/authentication.authenticationHttpSoap11Endpoint/ ) | sed -n -e  's/.\+sessionId>\(.\+\)<\/.\+/\1/p' > .sessionid
 }
 
@@ -75,8 +87,8 @@ get_sessionid(){
 
 submitRequest(){
 	envelope=$1
-	echo "submitting request $envelope" 1>&2
-	echo "... to $ADDRESS" 1>&2
+	if [[ $VERBOSE ]]; then echo "submitting request $envelope" ; fi
+	if [[ $VERBOSE ]]; then echo "... to $ADDRESS" ; fi
 	ACTION='urn:submitRequest'
 
 	H_CONTENT_TYPE="Content-Type: text/xml;charset=UTF-8"
@@ -85,6 +97,7 @@ submitRequest(){
 
 	#xmllint --format <( curl -V -H $H_CONTENT_TYPE -H $H_ACTION -H $H_AUTH --data @"$EXEC_PATH/$ENVELOPE" $ADDRESS/$ENDPOINT/services/realtime.realtimeHttpSoap11Endpoint/ )
 	#curl -H $H_CONTENT_TYPE -H $H_ACTION -H $H_AUTH --data @"$EXEC_PATH/$envelope" $ADDRESS/$ENDPOINT/services/realtime.realtimeHttpSoap11Endpoint/
+	if [[ $VERBOSE ]]; then echo "curl --silent -H \"$H_CONTENT_TYPE\" -H \"$H_ACTION\" -H \"$H_AUTH\" --data @\"$EXEC_PATH/$envelope\" $ADDRESS/$ENDPOINT/services/realtime.realtimeHttpSoap11Endpoint/" ; fi
 	curl --silent -H "$H_CONTENT_TYPE" -H "$H_ACTION" -H "$H_AUTH" --data @"$EXEC_PATH/$envelope" $ADDRESS/$ENDPOINT/services/realtime.realtimeHttpSoap11Endpoint/
 }
 
@@ -107,13 +120,13 @@ fi
 # in minutes
 max_old=10
 find .sessionid -mmin +$max_old -exec rm {} \; 2> /dev/null
-SESSIONID=$(cat .sessionid)
+SESSIONID=$(cat .sessionid 2> /dev/null )
 
 if [ -z $SESSIONID ]; then
 	get_sessionid
 	SESSIONID=$(cat .sessionid)
 else
-	echo 'reusing sessionid' 1>&2
+	if [[ $VERBOSE ]]; then echo "reusing sessionid" 1>&2 ; fi
 fi
 
 # 2. Execute request
