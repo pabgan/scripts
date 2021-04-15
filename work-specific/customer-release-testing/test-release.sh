@@ -121,7 +121,7 @@ diff_ncd() {
 
 jenkins_url='http://rc-build-01.assia-inc.com:8080'
 user='pganuza'
-pass='Dr=G+mDD'
+pass='*******'
 execute_jenkins_job() {
 	job_name=$1
 
