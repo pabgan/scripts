@@ -28,20 +28,22 @@ change_percentiles() {
 
 update_topology() {
 	#TODO
-	echo '# update_topology: NOT IMPLEMENTED YET!!'
+	echo '# WARN: update_topology: NOT IMPLEMENTED YET!!'
 }
 
 deploy_simulators() {
 	#TODO
-	echo '# deploy_simulators: NOT IMPLEMENTED YET!!'
+	echo '# WARN: deploy_simulators: NOT IMPLEMENTED YET!!'
 }
 
 deploy_ansible() {
 	#TODO
-	echo '# deploy_ansible: NOT IMPLEMENTED YET!!'
+	echo '# WARN: deploy_ansible: NOT IMPLEMENTED YET!!'
 }
 
 refresh_rclone_token() {
+	#TODO
+	echo '# WARN: refresh_rclone_token: NOT IMPLEMENTED YET!!'
 }
 
 setup() {
