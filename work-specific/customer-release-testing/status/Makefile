@@ -37,11 +37,11 @@ sltp-table.md: sltp.docm
 	docx2txt < sltp.docm > sltp-all.txt
 	grep -A117 -E 'Table of Contents\s*[0-9]*' sltp-all.txt | grep -A1 -E '^[3-5]' > sltp-toc.txt
 	sed -i 's/\s\+[0-9]\+$$//' sltp-toc.txt
-	@echo "##### Results" > sltp-table.md
+	@echo "### Results" > sltp-table.md
 	./sltp.py sltp-toc.txt >> sltp-table.md
 
 sltp-comments.md:
-	@echo "##### Comments" > sltp-comments.md
+	@echo "### Comments" > sltp-comments.md
 	@echo "None" >> sltp-comments.md
 
 sltp.md: sltp-table.md sltp-comments.md

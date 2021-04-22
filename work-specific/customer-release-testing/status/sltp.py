@@ -21,7 +21,7 @@ with open(f_sltp_toc, mode='r') as infile:
             # Generic / Customer specific division
             if re.search('^[0-9]\s', line):
                 x = re.findall('^([0-9])\s+(.*)', line)
-                print("### %s" % (x[0][1]))
+                print("#### %s" % (x[0][1]))
                 print_table_header()
             # Actual list of tests
             if re.search('^[0-9]\.', line):
