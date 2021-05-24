@@ -88,9 +88,22 @@ all_lines_to_po() {
 	echo "----"
 }
 
+force_line_reset() {
+	echo '# WARN: force_line_reset: NOT IMPLEMENTED YET!!'
+}
+
+warn_whitelist_if_need_be() {
+	ssh user@$CUSTOMER_ENV.assia-inc.com 'ls ~/install/server/config/migration > /dev/null 2>&1'
+	if [[ $( echo "$?" ) == 0 ]]; then
+		echo '# WARN: Customer has mismatch configured. Whitelist must be run!!'
+	fi
+}
+
 prepare_sltp() {
 	#TODO: whitelist para OI/Colombia
+	warn_whitelist_if_need_be
 	all_lines_to_po
+	force_line_reset
 }
 
 download_ncd_old (){
