@@ -46,12 +46,25 @@ refresh_rclone_token() {
 	echo '# WARN: refresh_rclone_token: NOT IMPLEMENTED YET!!'
 }
 
+prepare_mismatch() {
+	ssh user@$CUSTOMER_ENV.assia-inc.com 'ls ~/install/server/config/migration > /dev/null 2>&1'
+	if [[ $( echo "$?" ) == 0 ]]; then
+		# Remind to run whitelist
+		echo '# WARN: Customer has mismatch configured. Whitelist must be run!!'
+
+		# Remind to truncate mismatch history
+		echo '# WARN: Customer has mismatch configured. `truncate table MGR_MMT_DETECTION_AGGREGATE;`!!'
+	fi
+
+}
+
 setup() {
 	refresh_rclone_token
 	get_deliverables
 	get_sltp
 	change_percentiles
 	update_topology
+	prepare_mismatch
 	deploy_simulators #? It might be that this is already done when deploying release
 	deploy_ansible
 }
@@ -92,16 +105,7 @@ force_line_reset() {
 	echo '# WARN: force_line_reset: NOT IMPLEMENTED YET!!'
 }
 
-warn_whitelist_if_need_be() {
-	ssh user@$CUSTOMER_ENV.assia-inc.com 'ls ~/install/server/config/migration > /dev/null 2>&1'
-	if [[ $( echo "$?" ) == 0 ]]; then
-		echo '# WARN: Customer has mismatch configured. Whitelist must be run!!'
-	fi
-}
-
 prepare_sltp() {
-	#TODO: whitelist para OI/Colombia
-	warn_whitelist_if_need_be
 	all_lines_to_po
 	force_line_reset
 }
