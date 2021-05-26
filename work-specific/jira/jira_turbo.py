@@ -15,14 +15,18 @@ with open(customfields_file_path) as customfields_file:
         customfields[pretty_name.strip()] = custom_name.strip()
         customfields[custom_name.strip()] = pretty_name.strip()
 
-def issue_print(issue):
+def issue_print(issue, print_name=True):
     field_names = dir(issue.fields)
     for field in field_names:
         # Skip private attributes
         if '__' not in field:
             # Print the pretty name if available in customfields.csv or the one that comes from
             # JIRA in other case
-            print('{}={}'.format(customfields.get(field, field), getattr(issue.fields, field)))
+            if print_name:
+                print('{}={}'.format(customfields.get(field, field), getattr(issue.fields, field)))
+            else:
+                print('{}'.format(getattr(issue.fields, field)))
+
 
 ########################################################
 ### ACTIONS
@@ -35,7 +39,7 @@ def query():
             # Translate the field name requested by the user if available in customfields.csv or 
             # else request it as is
             fields_names = [ customfields.get(field_requested, field_requested)  for field_requested in args.fields_requested ]
-            issue_print(jira.issue(args.issue, fields=fields_names))
+            issue_print(jira.issue(args.issue, fields=fields_names), False)
     elif args.issues:
         result = jira.search_issues(args.issues)
         print('KEY;SUMMARY;UPDATED;ASSIGNEE;STATUS')
