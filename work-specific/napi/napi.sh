@@ -98,7 +98,8 @@ submitRequest(){
 	#xmllint --format <( curl -V -H $H_CONTENT_TYPE -H $H_ACTION -H $H_AUTH --data @"$EXEC_PATH/$ENVELOPE" $ADDRESS/$ENDPOINT/services/realtime.realtimeHttpSoap11Endpoint/ )
 	#curl -H $H_CONTENT_TYPE -H $H_ACTION -H $H_AUTH --data @"$EXEC_PATH/$envelope" $ADDRESS/$ENDPOINT/services/realtime.realtimeHttpSoap11Endpoint/
 	if [[ $VERBOSE ]]; then echo "curl --silent -H \"$H_CONTENT_TYPE\" -H \"$H_ACTION\" -H \"$H_AUTH\" --data @\"$EXEC_PATH/$envelope\" $ADDRESS/$ENDPOINT/services/realtime.realtimeHttpSoap11Endpoint/" ; fi
-	curl --silent -H "$H_CONTENT_TYPE" -H "$H_ACTION" -H "$H_AUTH" --data @"$EXEC_PATH/$envelope" $ADDRESS/$ENDPOINT/services/realtime.realtimeHttpSoap11Endpoint/
+	#curl --silent -H "$H_CONTENT_TYPE" -H "$H_ACTION" -H "$H_AUTH" --data @"$EXEC_PATH/$envelope" $ADDRESS/$ENDPOINT/services/realtime.realtimeHttpSoap11Endpoint/
+	curl --silent -H "$H_CONTENT_TYPE" -H "$H_ACTION" -H "$H_AUTH" --data @"$envelope" $ADDRESS/$ENDPOINT/services/realtime.realtimeHttpSoap11Endpoint/
 }
 
 
