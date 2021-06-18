@@ -454,6 +454,39 @@ done
 ```
 
 ----
+## Test 3.29
+```sql
+
+SELECT distinct dslam FROM v_dslams where technology='PON';
+
+for line in 9485550100 0000510001; do
+	# block
+	sed "s/{operation}/block/" PON_MANAGE_ONT_STATUS.xml | sed "s/{line_id}/"$line"/" > "$line"-block.xml
+	napi.sh submitRequest "$line"-block.xml | xmllint --format - > "$line"-block_result.xml
+
+	# reset
+	sed "s/{operation}/reset/" PON_MANAGE_ONT_STATUS.xml | sed "s/{line_id}/"$line"/" > "$line"-reset.xml
+	napi.sh submitRequest "$line"-reset.xml | xmllint --format - > "$line"-reset1_result.xml
+
+	# unblock
+	sed "s/{operation}/unblock/" PON_MANAGE_ONT_STATUS.xml | sed "s/{line_id}/"$line"/" > "$line"-unblock.xml
+	napi.sh submitRequest "$line"-unblock.xml | xmllint --format - > "$line"-unblock_result.xml
+
+	# reset
+	napi.sh submitRequest "$line"-reset.xml | xmllint --format - > "$line"-reset2_result.xml
+
+	# remote_reset
+	sed "s/{operation}/remote_reset/" PON_MANAGE_ONT_STATUS.xml | sed "s/{line_id}/"$line"/" > "$line"-remote_reset.xml
+	napi.sh submitRequest "$line"-remote_reset.xml | xmllint --format - > "$line"-remote_reset_result.xml
+done
+
+```
+```sh
+
+
+```
+
+----
 ## Test 3.30
 ```sh
 
