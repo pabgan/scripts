@@ -111,10 +111,10 @@ if [[ ! -z $ADDITIONAL_PARAMETERS ]]; then
 	if [[ $VERBOSE ]]; then echo "$ curl --silent -k --request $ACTION --url $ADDRESS/$ENDPOINT/$URI --header 'accept: application/json' --header \"Authorization: bearer $TOKEN\" --header 'cache-control: no-cache' --header 'content-type: application/json' $OPTIONS" ; fi
 	if [[ $VERBOSE ]]; then echo "----------------- response -----------------" ; fi
 	curl --silent -k --request $ACTION --url $ADDRESS/$ENDPOINT/$URI --header 'accept: application/json' --header "Authorization: bearer $TOKEN" --header 'cache-control: no-cache' --header 'content-type: application/json' -d $ADDITIONAL_PARAMETERS $OPTIONS
-	if [[ $VERBOSE ]]; then echo "----------------- response -----------------" ; fi
+	if [[ $VERBOSE ]]; then echo -e "\n----------------- response -----------------" ; fi
 else
 	if [[ $VERBOSE ]]; then echo "$ curl --silent -k --request $ACTION --url $ADDRESS/$ENDPOINT/$URI --header 'accept: application/json' --header \"Authorization: bearer $TOKEN\" --header 'cache-control: no-cache' --header 'content-type: application/json' $OPTIONS" ; fi
 	if [[ $VERBOSE ]]; then echo "----------------- response -----------------" ; fi
 	curl --silent -k --request $ACTION --url $ADDRESS/$ENDPOINT/$URI --header 'accept: application/json' --header "Authorization: bearer $TOKEN" --header 'cache-control: no-cache' --header 'content-type: application/json' $OPTIONS
-	if [[ $VERBOSE ]]; then echo "----------------- response -----------------" ; fi
+	if [[ $VERBOSE ]]; then echo -e "\n----------------- response -----------------" ; fi
 fi
