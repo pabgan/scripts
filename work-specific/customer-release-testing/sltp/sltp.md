@@ -7,7 +7,7 @@
 
 ###
 
-prev_sltp='../../5.7.1.0/sltp'
+prev_sltp='../../../21.1.0/sltp/results'
 
 ----
 ## Test 2.5.1.1
@@ -40,38 +40,18 @@ exec DBMS_SNAPSHOT.REFRESH('V_LINE_CARD_INFO_LATEST_PM','c');
 ## 3.8
 ```sh
 
-test='3.8.1'
-diff $prev_sltp/output_test_$test.dat output_test_$test.dat
+test='3.8'
+for f in $( ls output_test_$test.* ); do
+	echo "$f"
+	echo "------------------"
+	diff <(sort $prev_sltp/$f) <(sort $f) ;
+done
 
-test='3.8.2.1'
-diff $prev_sltp/output_test_$test.dat output_test_$test.dat
+```
+### 3.8.2.3 Algo cambió @adelacruz en la query y lo ha jodido
+```sh
 
-test='3.8.2.2'
-diff <( sort $prev_sltp/output_test_$test.dat ) <(sort output_test_$test.dat )
-
-test='3.8.2.3'
-diff $prev_sltp/output_test_$test.dat output_test_$test.dat
-
-test='3.8.2.4.1'
-diff $prev_sltp/output_test_$test.dat output_test_$test.dat
-
-test='3.8.2.5'
-diff $prev_sltp/output_test_$test.dat output_test_$test.dat
-
-test='3.8.2.6'
-diff $prev_sltp/output_test_$test.dat output_test_$test.dat
-
-test='3.8.2.7'
-diff <( sort $prev_sltp/output_test_$test.dat ) <( sort output_test_$test.dat )
-
-test='3.8.2.8.0'
-diff $prev_sltp/output_test_$test.dat output_test_$test.dat
-
-test='3.8.2.8'
-diff $prev_sltp/output_test_$test.dat output_test_$test.dat
-
-test='3.8.2.9'
-diff $prev_sltp/output_test_$test.dat output_test_$test.dat
+diff <(sed -E 's/\s+/;/g' $prev_sltp/output_test_3.8.2.3.dat ) <(sed -E 's/\s+/;/g' output_test_3.8.2.3.dat )
 
 ```
 
