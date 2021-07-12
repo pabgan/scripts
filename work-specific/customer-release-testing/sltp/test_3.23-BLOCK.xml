@@ -9,12 +9,12 @@
 					<!--Optional:-->
 					<xsd1:type>realtime.portreset.operation.type</xsd1:type>
 					<!--Optional:-->
-					<xsd1:value>{operation}</xsd1:value>
+					<xsd1:value>BLOCK</xsd1:value>
 				</xsd:additionalParameters>
 				<!--Optional:-->
-				<xsd:entityID>{line_id}</xsd:entityID>
+				<xsd:entityID>#line_id#</xsd:entityID>
 				<!--Optional:-->
-				<xsd:requestType>PON_MANAGE_ONT_STATUS</xsd:requestType>
+				<xsd:requestType>PORT_RESET</xsd:requestType>
 			</impl:request>
 			<impl:timeout>200</impl:timeout>
 		</impl:submitRequest>

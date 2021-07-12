@@ -40,13 +40,18 @@ sltp-table.md: sltp.docm
 	@echo "### Results" > sltp-table.md
 	./sltp.py sltp-toc.txt >> sltp-table.md
 
-sltp-comments.md:
-	@echo "### Comments" > sltp-comments.md
-	@echo "None" >> sltp-comments.md
+#sltp-comments.md:
+#	@echo "### Comments" > sltp-comments.md
+#	@echo "None" >> sltp-comments.md
+#
+#sltp.md: sltp-table.md sltp-comments.md
+#	@echo "## System Level Test Plan" > sltp.md
+#	@cat sltp-comments.md >> sltp.md
+#	@echo "" >> sltp.md
+#	@cat sltp-table.md >> sltp.md
 
-sltp.md: sltp-table.md sltp-comments.md
+sltp.md: sltp-table.md
 	@echo "## System Level Test Plan" > sltp.md
-	@cat sltp-comments.md >> sltp.md
 	@echo "" >> sltp.md
 	@cat sltp-table.md >> sltp.md
 

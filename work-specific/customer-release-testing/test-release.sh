@@ -40,7 +40,14 @@ update_topology() {
 	echo "    update_topology() "
 	#TODO
 	echo "# WARN: NOT IMPLEMENTED YET!!"
+	update_topology_$CUSTOMER
 	echo "################# DONE ###########################\n"
+}
+
+update_topology_telefonica_colombia() {
+	echo " --> For telefonica_colombia you have to mannually execute the following:"
+	echo "INSERT INTO DSLAM_TOPOLOGY (DSLAM_IP,TOPOLOGY) VALUES ('127.0.0.1','OUTDOOR');"
+	echo "INSERT INTO DSLAM_TOPOLOGY (DSLAM_IP,TOPOLOGY) VALUES ('127.0.0.2','INDOOR');"
 }
 
 deploy_simulators() {
@@ -103,10 +110,16 @@ setup() {
 #######################
 # 1. TEST
 #
+test() {
+	prepare_diff
+	prepare_tickets
+	prepare_sltp
+}
 
 # 1.1 diff
 #TODO:
-cda() {
+prepare_diff() {
+	mkdir -p diff
 	# Prepare config.properties
 	## checkout tag
 	## get generic version that it is based on
@@ -115,6 +128,9 @@ cda() {
 
 # 1.2 tickets
 # nothing to do?
+prepare_tickets() {
+	mkdir -p tickets
+}
 
 # 1.3 SLTP
 all_lines_to_po() {
@@ -148,7 +164,7 @@ force_line_reset() {
 }
 
 prepare_sltp() {
-	all_lines_to_po
+	t add pri a "ejecutar 'test-release.sh all_lines_to_po' para meter todas las líneas en PO para +SLTP de +$CUSTOMER $(tdate 'friday')"
 	force_line_reset
 }
 
