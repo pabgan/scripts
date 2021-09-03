@@ -1,4 +1,0 @@
-prueba `con` varios `trozos de código` en la misma línea.
-@jmatias @nouser
-![test5.png](test5.png)
-[test5.tar.gz](test5.tar.gz)
