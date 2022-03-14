@@ -1,1 +1,3 @@
 # scripts
+
+Collection of scripts that I have created in an attempt to switch over [DWM](https://dwm.suckless.org/)...
